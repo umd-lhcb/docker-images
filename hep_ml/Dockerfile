@@ -5,22 +5,9 @@ FROM rootproject/root-ubuntu16
 USER root
 RUN userdel builder
 
-#ARG username=physicist
-#RUN useradd --create-home --home-dir /home/${username} ${username}
-#ENV HOME /home/${username}
-#USER ${username}
+# Add the bootstrap script
+ADD ./bootstrap.sh /usr/local/bin
 
-RUN export uid=1000 gid=100 && \
-			   mkdir -p /home/developer && \
-			   echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
-			   echo "developer:x:${uid}:" >> /etc/group && \
-			   chown ${uid}:${gid} -R /home/developer
-
-
-#WORKDIR /data
-
-USER developer
-ENV HOME /home/developer
-
-# Start bash by default
-CMD ["bash"]
+# Go to the actual working directory
+WORKDIR /data
+CMD ["/usr/bin/bootstrap.sh"]

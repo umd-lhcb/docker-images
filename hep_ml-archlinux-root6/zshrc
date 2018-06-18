@@ -121,7 +121,7 @@ else
 fi
 
 set -A altchar ${(s..)terminfo[acsc]}
-local user="$pB%(!:$pfg_red:$pfg_green)%n$pR"
+local user="$pB%(!:$pfg_red:$pfg_yellow)%n$pR"
 local symbol="$pB%(!:$pfg_red# :$pfg_yellow> )$pR"
 local job="%1(j,$pfg_red:$pfg_blue%j,)$pR"
 local prompt_time="%(?:$pfg_green:$pfg_red)%*$pR"

@@ -10,7 +10,7 @@ ADD ./bootstrap.sh /usr/local/bin
 
 # Make UID and GID ENV
 ENV UID 1000
-ENV GID 100
+ENV GID 985
 ENV XAUTHORITY /home/physicist/.Xauthority
 
 # Go to the actual working directory

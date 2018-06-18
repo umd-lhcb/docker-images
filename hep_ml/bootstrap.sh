@@ -12,9 +12,6 @@ echo "physicist::17640:0:99999:7:::" >> /etc/shadow
 
 chown ${UID}:${GID} -R /home/physicist
 
-# FIXME: We assume this directory has been created inside the docker image
-chown ${UID}:${GID} -R /data
-
 # Open to the persistent working
 cd /data
 su physicist

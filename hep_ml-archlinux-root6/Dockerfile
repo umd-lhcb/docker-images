@@ -28,24 +28,20 @@ RUN sudo pacman -S --noconfirm python python-numpy python-scipy python-pandas
 # Now we install root
 RUN yay -S --noconfirm root
 
+# Install hep_ml and root_numpy
+RUN yay -S --noconfirm python-hep_ml python-root_numpy
+
 ## Run as root, and delete default 'builder'
-#USER root
-#RUN userdel -r builder
+USER root
+RUN userdel -r builder
 
-## Add the bootstrap script
-#ADD ./bootstrap.sh /usr/local/bin
+# Add the bootstrap script
+ADD ./bootstrap.sh /usr/local/bin
 
-## Make UID and GID ENV
-#ENV UID 1000
-#ENV GID 985
-
-## Update ubuntu
-#RUN apt-get update && apt-get -qq -y upgrade
-
-## Install pip
-#RUN apt-get -qq -y install python-pip
+# Make UID and GID ENV
+ENV UID 1000
+ENV GID 985
 
 ## Go to the actual working directory
-#WORKDIR /data
-#CMD ["/usr/local/bin/bootstrap.sh"]
-CMD ["/bin/bash"]
+WORKDIR /data
+CMD ["/usr/local/bin/bootstrap.sh"]

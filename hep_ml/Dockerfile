@@ -8,6 +8,11 @@ RUN userdel builder
 # Add the bootstrap script
 ADD ./bootstrap.sh /usr/local/bin
 
+# Make UID and GID ENV
+ENV UID 1000
+ENV GID 100
+ENV XAUTHORITY /home/physicist/.Xauthority
+
 # Go to the actual working directory
 WORKDIR /data
-CMD ["/usr/bin/bootstrap.sh"]
+CMD ["/usr/local/bin/bootstrap.sh"]

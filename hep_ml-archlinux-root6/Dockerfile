@@ -4,21 +4,29 @@ FROM archimg/base-devel
 # Update first
 RUN pacman -Syu --noconfirm
 
+# Set makepkg flags
+RUN echo 'MAKEFLAGS="-j6"' >> /etc/makepkg.conf
+
 # Create a builder with sudo permission
 RUN pacman -S sudo --noconfirm
-RUN useradd -m -u 999 -g 999 builder
-RUN echo "builder ALL=(root) NOPASSWD: ALL" > /etc/sudoers.d/builder
+RUN useradd -m -u 999 -g 999 builder && \
+    echo "builder ALL=(root) NOPASSWD: ALL" > /etc/sudoers.d/builder
 
 USER builder
 WORKDIR /home/builder
 
 # Now get yay so that we can build aur packages
-RUN sudo pacman -S go git
-RUN curl https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz --output yay.tar.gz
-RUN tar -xzf yay.tar.gz
-RUN cd yay && makepkg
-RUN sudo pacman -U --noconfirm ./*.xz
+RUN sudo pacman -S --noconfirm go git
+RUN curl https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz --output yay.tar.gz && \
+    tar -xzf yay.tar.gz && \
+    cd yay && makepkg -ci --noconfirm && \
+    rm -rf yay.tar.gz yay
 
+# Install Python & company
+RUN sudo pacman -S --noconfirm python python-numpy python-scipy python-pandas
+
+# Now we install root
+RUN yay -S --noconfirm root
 
 ## Run as root, and delete default 'builder'
 #USER root

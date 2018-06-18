@@ -11,7 +11,6 @@ ADD ./bootstrap.sh /usr/local/bin
 # Make UID and GID ENV
 ENV UID 1000
 ENV GID 985
-ENV XAUTHORITY /home/physicist/.Xauthority
 
 # Update ubuntu
 RUN apt-get update && apt-get -qq -y upgrade

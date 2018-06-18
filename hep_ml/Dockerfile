@@ -3,7 +3,7 @@ FROM rootproject/root-ubuntu16
 
 # Run as root, and delete default 'builder'
 USER root
-RUN userdel builder
+RUN userdel -r builder
 
 # Add the bootstrap script
 ADD ./bootstrap.sh /usr/local/bin

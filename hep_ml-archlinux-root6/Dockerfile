@@ -12,6 +12,11 @@ RUN pacman -S sudo --noconfirm
 RUN useradd -m -u 999 -g 999 builder && \
     echo "builder ALL=(root) NOPASSWD: ALL" > /etc/sudoers.d/builder
 
+# Generate locale
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen
+ENV LC_ALL "en_US.UTF-8"
+
 USER builder
 WORKDIR /home/builder
 

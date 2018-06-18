@@ -32,8 +32,8 @@ RUN yay -S --noconfirm root
 RUN yay -S --noconfirm python-hep_ml python-root_numpy
 
 # QoL improvements
-RUN pacman -Rsn --noconfirm vi && \
-    pacman -S --noconfirm wget zsh tmux neovim python-neovim python-jedi python-pip python-matplotlib && \
+RUN sudo pacman -Rsn --noconfirm vi && \
+    sudo pacman -S --noconfirm wget zsh tmux neovim python-neovim python-jedi python-pip python-matplotlib && \
     yay -S --noconfirm neovim-drop-in neovim-youcompleteme-core-git
 RUN mkdir -p /home/physicist/.config && \
     cd /home/physicist/.config && \

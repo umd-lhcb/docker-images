@@ -1,6 +1,6 @@
 # docker-images: Custom dockers for UMD LHCb group
-## hep_ml (all variants)
+## hep_ml
 * On Linux:
 ```
-docker run --rm -it -v <src_path>:/data -e DISPLAY -v $XAUTHORITY:/home/physicist/.Xauthority --net=host <image_name>
+docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host ypsunumd/hep_ml
 ```

@@ -13,6 +13,12 @@ ENV UID 1000
 ENV GID 985
 ENV XAUTHORITY /home/physicist/.Xauthority
 
+# Update ubuntu
+RUN apt-get update && apt-get -qq -y upgrade
+
+# Install pip
+RUN apt-get -qq -y install python-pip
+
 # Go to the actual working directory
 WORKDIR /data
 CMD ["/usr/local/bin/bootstrap.sh"]

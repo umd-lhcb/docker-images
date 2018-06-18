@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Add a user with correct uid and gid at runtime
-mkdir -p /home/physicist
+#mkdir -p /home/physicist
 
 echo "physicist:x:${UID}:${GID}:Physicist,,,:/home/physicist:/bin/bash" >> \
     /etc/passwd
@@ -14,4 +14,4 @@ chown ${UID}:${GID} -R /home/physicist
 
 # Open to the persistent working
 cd /data
-su physicist
+su physicist -c zsh

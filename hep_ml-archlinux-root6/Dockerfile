@@ -31,7 +31,19 @@ RUN yay -S --noconfirm root
 # Install hep_ml and root_numpy
 RUN yay -S --noconfirm python-hep_ml python-root_numpy
 
-## Run as root, and delete default 'builder'
+# QoL improvements
+RUN pacman -Rsn --noconfirm vi && \
+    pacman -S --noconfirm wget zsh tmux neovim python-neovim python-jedi python-pip python-matplotlib && \
+    yay -S --noconfirm neovim-drop-in neovim-youcompleteme-core-git
+RUN mkdir -p /home/physicist/.config && \
+    cd /home/physicist/.config && \
+    git clone https://github.com/ypsun-umd/docker-images.git nvim && \
+    cd nvim && \
+    git submodule update --init --recursive
+ADD ./zshrc /home/physicist/.zshrc
+ADD ./tmux.conf /home/physicist/.tmux.conf
+
+# Run as root, and delete default 'builder'
 USER root
 RUN userdel -r builder
 

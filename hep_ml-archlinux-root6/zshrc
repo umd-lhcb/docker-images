@@ -12,7 +12,6 @@ if [[  "$-" != *i* ]]; then return 0; fi
 #fi
 
 export SHELL=`which zsh`
-export LC_ALL="en_US.UTF-8"
 
 # Customize color output
 [[ -f $HOME/.lscolors ]] && eval $(dircolors -b $HOME/.lscolors)

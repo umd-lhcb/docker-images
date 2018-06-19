@@ -2,8 +2,10 @@
 FROM archimg/base-devel
 
 # Generate locale
+USER root
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
-    locale-gen
+    locale-gen && \
+    localectl set-locale LANG=en_US.UTF-8
 ENV LC_ALL "en_US.UTF-8 UTF-8"
 
 # Update first
@@ -40,6 +42,7 @@ RUN yay -S --noconfirm python-hep_ml python-root_numpy
 RUN sudo pacman -Rsn --noconfirm vi && \
     sudo pacman -S --noconfirm sxiv ttf-dejavu openssh wget zsh tmux neovim python-neovim python-jedi python-pip && \
     yay -S --noconfirm neovim-drop-in neovim-youcompleteme-core-git
+
 USER root
 RUN mkdir -p /home/physicist/.config && \
     mkdir -p /home/physicist/.tmp/vim && \

@@ -30,7 +30,7 @@ RUN curl https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz --output yay
     rm -rf yay.tar.gz yay
 
 # Install Python & company
-RUN sudo pacman -S --noconfirm python python-numpy python-scipy python-pandas python-matplotlib
+RUN sudo pacman -S --noconfirm python python-numpy python-scipy python-pandas
 
 # Now we install root
 RUN yay -S --noconfirm root
@@ -40,7 +40,7 @@ RUN yay -S --noconfirm python-hep_ml python-root_numpy
 
 # QoL improvements
 RUN sudo pacman -Rsn --noconfirm vi && \
-    sudo pacman -S --noconfirm sxiv ttf-dejavu openssh wget zsh tmux neovim python-neovim python-jedi python-pip && \
+    sudo pacman -S --noconfirm sxiv ttf-dejavu openssh wget zsh tmux neovim python-neovim python-jedi python-pip python-matplotlib && \
     yay -S --noconfirm neovim-drop-in neovim-youcompleteme-core-git
 
 USER root

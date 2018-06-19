@@ -6,7 +6,7 @@ USER root
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen && \
     echo "LANG=en_US.UTF-8" > /etc/locale.conf
-ENV LC_ALL "en_US.UTF-8 UTF-8"
+ENV LC_ALL "en_US.UTF-8"
 
 # Update first
 RUN pacman -Syu --noconfirm

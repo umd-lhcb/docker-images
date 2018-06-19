@@ -40,7 +40,7 @@ RUN yay -S --noconfirm python-hep_ml python-root_numpy
 
 # QoL improvements
 RUN sudo pacman -Rsn --noconfirm vi && \
-    sudo pacman -S --noconfirm sxiv ttf-dejavu openssh wget zsh tmux neovim python-neovim python-jedi python-pip python-matplotlib && \
+    sudo pacman -S --noconfirm sxiv ttf-dejavu openssh wget zsh tmux neovim xclip python-neovim python-jedi python-pip python-matplotlib && \
     yay -S --noconfirm neovim-drop-in neovim-youcompleteme-core-git
 
 USER root

@@ -2,9 +2,9 @@
 FROM archimg/base-devel
 
 # Generate locale
-#RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
-    #locale-gen
-#ENV LC_ALL
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen
+ENV LC_ALL "en_US.UTF-8 UTF-8"
 
 # Update first
 RUN pacman -Syu --noconfirm
@@ -28,7 +28,7 @@ RUN curl https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz --output yay
     rm -rf yay.tar.gz yay
 
 # Install Python & company
-RUN sudo pacman -S --noconfirm python python-numpy python-scipy python-pandas
+RUN sudo pacman -S --noconfirm python python-numpy python-scipy python-pandas python-matplotlib
 
 # Now we install root
 RUN yay -S --noconfirm root
@@ -38,7 +38,7 @@ RUN yay -S --noconfirm python-hep_ml python-root_numpy
 
 # QoL improvements
 RUN sudo pacman -Rsn --noconfirm vi && \
-    sudo pacman -S --noconfirm sxiv ttf-dejavu openssh wget zsh tmux neovim python-neovim python-jedi python-pip python-matplotlib && \
+    sudo pacman -S --noconfirm sxiv ttf-dejavu openssh wget zsh tmux neovim python-neovim python-jedi python-pip && \
     yay -S --noconfirm neovim-drop-in neovim-youcompleteme-core-git
 USER root
 RUN mkdir -p /home/physicist/.config && \

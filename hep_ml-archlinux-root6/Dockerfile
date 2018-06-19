@@ -5,7 +5,7 @@ FROM archimg/base-devel
 USER root
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen && \
-    localectl set-locale LANG=en_US.UTF-8
+    echo "LANG=en_US.UTF-8" > /etc/locale.conf
 ENV LC_ALL "en_US.UTF-8 UTF-8"
 
 # Update first

@@ -81,7 +81,7 @@ RUN yay -S --noconfirm --asdep \
     blas xrootd
 
 # Now we install root
-RUN sudo yay -Scc && yay -S --noconfirm root
+RUN yay -S --noconfirm root
 
 # Install hep_ml and root_numpy
 RUN yay -S --noconfirm python-hep_ml python-root_numpy

@@ -30,7 +30,7 @@ RUN useradd -m -u 999 -g 999 builder && \
 # Install Python libraries we'll be using
 RUN pacman -S --noconfirm python python-numpy python-scipy python-pandas python-matplotlib && \
     # QoL improvements
-    pacman -S --noconfirm sxiv tig ttf-dejavu openssh wget zsh tmux python-pip \
+    pacman -S --noconfirm go sxiv tig ttf-dejavu openssh wget zsh tmux python-pip \
         neovim xclip python-neovim python-jedi
 
 
@@ -56,7 +56,6 @@ USER builder
 WORKDIR /home/builder
 
 # Now get yay so that we can build aur packages
-RUN sudo pacman -S --noconfirm go git
 RUN curl https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz --output yay.tar.gz && \
     tar -xzf yay.tar.gz && \
     cd yay && \

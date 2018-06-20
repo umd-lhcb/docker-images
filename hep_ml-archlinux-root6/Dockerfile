@@ -13,7 +13,7 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
 ENV LC_ALL "en_US.UTF-8"
 
 # Update, just in case
-RUN pacman -Syu --noconfirm & \
+RUN pacman -Syu --noconfirm
 
 # Set makepkg flags
 RUN echo 'MAKEFLAGS="-j6"' >> /etc/makepkg.conf

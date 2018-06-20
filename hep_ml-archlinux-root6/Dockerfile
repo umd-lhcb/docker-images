@@ -107,6 +107,8 @@ ADD ./bootstrap.sh /usr/local/bin
 # Make UID and GID ENV, also delete 'builder'
 ENV UID 1000
 ENV GID 985
-RUN userdel -r builder
+RUN userdel -r builder && \
+    # Clean cache
+    pacman -Scc
 
 CMD ["/usr/local/bin/bootstrap.sh"]

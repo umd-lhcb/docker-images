@@ -30,7 +30,7 @@ RUN useradd -m -u 999 -g 999 builder && \
 # Install Python libraries we'll be using
 RUN pacman -S --noconfirm python python-numpy python-scipy python-pandas python-matplotlib && \
     # QoL improvements
-    pacman -S --noconfirm go sxiv tig ttf-dejavu openssh wget zsh tmux python-pip \
+    pacman -S --noconfirm ctags go sxiv tig ttf-dejavu openssh wget zsh tmux python-pip \
         neovim xclip python-neovim python-jedi
 
 

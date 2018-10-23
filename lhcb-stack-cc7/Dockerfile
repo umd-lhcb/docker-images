@@ -52,6 +52,6 @@ RUN mkdir -p /opt/lhcb
 RUN pip install lbinstall
 
 RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
-RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r1_x86_64_slc6_gcc62_opt
+RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r1_x86_64_centos7_gcc62_opt
 
 CMD ["/bin/zsh"]

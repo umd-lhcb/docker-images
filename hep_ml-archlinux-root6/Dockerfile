@@ -72,7 +72,7 @@ RUN sudo pacman -Rsn --noconfirm vi && \
 ########
 
 # Install ROOT dependencies
-RUN yay -S --noconfirm --asdep \
+RUN yay -S --noconfirm --asdeps \
     cern-vdt cfitsio fftw ftgl gl2ps glew graphviz gsl hicolor-icon-theme \
     intel-tbb libafterimage libiodbc libmariadbclient postgresql-libs sqlite \
     tex-gyre-fonts \

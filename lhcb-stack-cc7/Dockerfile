@@ -38,3 +38,20 @@ RUN yum install -y \
     xz-devel lcov \
     zsh \
     && yum clean all && rm -rf /var/cache/yum
+
+# Update pip
+RUN pip install --upgrade pip setuptools
+
+
+##################################
+# Install LHCb package installer #
+##################################
+
+RUN mkdir -p /opt/lhcb
+
+RUN pip install lbinstall
+
+RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
+RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r1_x86_64_slc6_gcc62_opt
+
+CMD ["/bin/zsh"]

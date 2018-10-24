@@ -37,6 +37,7 @@ RUN yum install -y \
     zip python-pip python-devel \
     xz-devel lcov \
     zsh \
+    tmux \
     && yum clean all && rm -rf /var/cache/yum
 
 # Update pip
@@ -54,4 +55,24 @@ RUN pip install lbinstall
 RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
 RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r6p1_x86_64_centos7_gcc62_opt
 
-CMD ["/bin/zsh"]
+
+###############################
+# Load default configurations #
+###############################
+
+ADD ./zshrc /home/physicist/.zshrc
+ADD ./tmux.conf /home/physicist/.tmux.conf
+
+
+#############################
+# Bootstrap user permission #
+#############################
+
+# Add the bootstrap script
+ADD ./bootstrap.sh /usr/local/bin
+
+# Make UID and GID ENV, also delete 'builder'
+ENV UID 1000
+ENV GID 985
+
+CMD ["/usr/local/bin/bootstrap.sh"]

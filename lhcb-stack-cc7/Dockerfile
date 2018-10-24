@@ -32,7 +32,7 @@ RUN yum install -y \
     xz-devel lcov \
     bzip2 zip \
     python-pip python-devel \
-    distcc ccache make cmake gcb gcc-c++ \
+    distcc ccache make cmake gcc-c++ \
     git subversion \
     zsh tmux emacs vim \
     && yum clean all && rm -rf /var/cache/yum
@@ -50,7 +50,7 @@ RUN mkdir -p /opt/lhcb
 RUN pip install lbinstall
 
 RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
-RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r6p1+avx2+fma_centos7_gcc62_opt
+RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r6p1_x86_64_centos7_gcc62_opt
 
 
 ###############################

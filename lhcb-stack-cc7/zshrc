@@ -453,4 +453,6 @@ if [[ -f $HOME/.zshrc.host ]]; then
     . $HOME/.zshrc.host
 fi
 
+source /opt/lhcb/LbLogin.sh
+
 #}}}

@@ -15,4 +15,4 @@ chown ${UID}:${GID} -R /home/physicist
 
 # cd to persistent working directory
 cd /data
-exec su physicist && source /opt/lhcb/LbLogin.sh
+exec su physicist

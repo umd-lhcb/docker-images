@@ -21,23 +21,20 @@ RUN yum update -y && \
 ####################
 
 RUN yum install -y \
-    rpm-build openssl-devel libXpm-devel procmail git nano cups-libs cups \
-    poppler arc poppler-data poppler-utils libfontenc openjpeg-libs portreserve \
-    expat-devel glib2-devel afs_tools hepix perl perl-version perl-Net-SSLeay \
-    perl-GSSAPI perl-MailTools psutils netpbm strace libevent-doc libevent \
-    libevent-devel distcc xorg-x11-xauth glibc-static libXp-devel libXi-devel \
-    libXmu-devel libSM-devel libICE-devel libXrender-devel imake \
-    xorg-x11-util-macros libjpeg-turbo-devel libXaw libXaw-devel fontconfig-devel \
-    xorg-x11-server-Xvfb emacs texlive-latex subversion createrepo symlinks libxslt \
-    ccache vim motif-devel CERN-CA-certs lcms lcms-libs castor-devel castor-lib \
-    castor-rfio-client libevent-headers cern-lxdistcc-hosts libgssglue \
-    openmotif-devel glibc-devel.x86_64 openmotif-devel mesa-libGLU-devel sudo \
-    gcb make libxslt-devel gcc-c++ libgit2-devel libfipscheck.so.1 bzip2 \
-    numactl-devel \
-    zip python-pip python-devel \
+    rpm-build openssl-devel libXpm-devel \
+    glib2-devel afs_tools hepix \
+    xorg-x11-xauth glibc-static libXp-devel libXi-devel \
+    xorg-x11-util-macros libjpeg-turbo-devel libXaw libXaw-devel \
+    xorg-x11-server-Xvfb createrepo symlinks libxslt \
+    CERN-CA-certs \
+    glibc-devel.x86_64 \
+    libxslt-devel libgit2-devel \
     xz-devel lcov \
-    zsh \
-    tmux \
+    bzip2 zip \
+    python-pip python-devel \
+    distcc ccache make cmake gcb gcc-c++ \
+    git subversion \
+    zsh tmux emacs vim \
     && yum clean all && rm -rf /var/cache/yum
 
 # Update pip
@@ -53,7 +50,7 @@ RUN mkdir -p /opt/lhcb
 RUN pip install lbinstall
 
 RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
-RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r6p1_x86_64_centos7_gcc62_opt
+RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r6p1+avx2+fma_centos7_gcc62_opt
 
 
 ###############################

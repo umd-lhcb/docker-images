@@ -1,3 +1,5 @@
+# vim:set ft=dockerfile:
+
 # Use CERN's official centos7
 FROM gitlab-registry.cern.ch/lhcb-docker/os-base/centos7-hepos:latest
 
@@ -41,9 +43,9 @@ RUN yum install -y \
 RUN pip install --upgrade pip setuptools
 
 
-##################################
-# Install LHCb package installer #
-##################################
+#########################
+# Install LHCb packages #
+#########################
 
 RUN mkdir -p /opt/lhcb
 
@@ -51,6 +53,8 @@ RUN pip install lbinstall
 
 RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
 RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r6p1_x86_64_centos7_gcc62_opt
+
+RUN pip install ganga
 
 
 ###############################

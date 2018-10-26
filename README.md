@@ -10,5 +10,5 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 ## lhcb-stack-cc
 * On Linux:
 ```
-docker run --rm -it -v <src_path>:/data -e UID=$(id -u) -e GID=$(id -g) --net=host ypsunumd/lhcb-stack-cc:<tag>
+docker run --rm -it -v <src_path>:/data -e UID=$(id -u) -e GID=$(id -g) --net=host ypsunumd/lhcb-stack-cc7:<tag>
 ```

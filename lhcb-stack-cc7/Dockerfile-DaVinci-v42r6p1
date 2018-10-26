@@ -54,7 +54,7 @@ RUN pip install lbinstall
 RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
 RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r6p1_x86_64_centos7_gcc62_opt
 
-RUN pip install ganga
+#RUN pip install ganga
 
 
 ###############################

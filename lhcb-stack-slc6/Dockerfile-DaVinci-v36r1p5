@@ -1,0 +1,62 @@
+# vim:set ft=dockerfile:
+
+# Use CERN's official centos7
+FROM hepsw/slc-base
+
+
+####################
+# Add dev packages #
+####################
+
+RUN yum install -y \
+    autoconf automake \
+    bash-completion \
+    binutils-devel bzip2-devel bzip2 \
+    file \
+    gcc gcc-c++ git glibc-devel glibc-static \
+    libtool libXpm-devel libXft-devel libXext-devel \
+    m4 make \
+    ncurses-devel \
+    patch \
+    readline readline-devel \
+    tar texinfo \
+    python-pip \
+    zsh tmux emacs vim \
+    && yum clean all && rm -rf /var/cache/yum
+
+# Update pip
+RUN pip install --upgrade pip setuptools
+
+
+#########################
+# Install LHCb packages #
+#########################
+
+RUN mkdir -p /opt/lhcb
+
+RUN pip install lbinstall
+
+RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
+RUN lbinstall --root=/opt/lhcb install DAVINCI_v36r1p5_x86_64_slc6_gcc49_opt
+
+
+###############################
+# Load default configurations #
+###############################
+
+ADD ./zshrc /home/physicist/.zshrc
+ADD ./tmux.conf /home/physicist/.tmux.conf
+
+
+#############################
+# Bootstrap user permission #
+#############################
+
+# Add the bootstrap script
+ADD ./bootstrap.sh /usr/local/bin
+
+# Make UID and GID ENV, also delete 'builder'
+ENV UID 1000
+ENV GID 985
+
+CMD ["/usr/local/bin/bootstrap.sh"]

@@ -83,8 +83,8 @@ RUN yay -S --noconfirm --asdeps \
 # Now we install root
 RUN yay -S --noconfirm root
 
-# Install hep_ml and root_numpy
-RUN yay -S --noconfirm python-hep_ml python-root_numpy
+# Install hep_ml
+RUN yay -S --noconfirm python-hep_ml
 
 
 #################################################
@@ -109,6 +109,6 @@ ENV UID 1000
 ENV GID 985
 RUN userdel -r builder && \
     # Clean cache
-    pacman -Scc
+    pacman -Scc --noconfirm
 
 CMD ["/usr/local/bin/bootstrap.sh"]

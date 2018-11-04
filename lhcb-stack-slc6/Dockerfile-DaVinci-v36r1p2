@@ -46,7 +46,7 @@ ENV MYSITEROOT /opt/lhcb-sw
 ENV PATH       $MYSITEROOT/usr/bin:$PATH
 #ENV CMTCONFIG  x86_64-slc6-gcc49-opt
 
-RUN lbpkr install-project DAVINCI v36r1p2 && \
+RUN lbpkr install-project -platforms=all DAVINCI v36r1p2 && \
     /bin/rm -rf $MYSITEROOT/{tmp,targz} && \
     /bin/mkdir ${MYSITEROOT}/{tmp,targz}
 

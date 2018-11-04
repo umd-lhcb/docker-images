@@ -1,7 +1,20 @@
 # vim:set ft=dockerfile:
 
-# Use CERN's official centos7
+# Use CERN's official slc6
 FROM hepsw/slc-base
+
+#################
+# Update system #
+#################
+
+# Make slc6 work inside the LayeredFS
+# This is an known bug. Go to the following url for more info:
+#   https://docs.oracle.com/cd/E93554_01/E69348/html/uek4-czc_xmc_xt.html
+RUN touch /var/lib/rpm/*
+RUN yum install -y yum-plugin-ovl
+
+RUN yum update -y && \
+    yum clean all && rm -rf /var/cache/yum
 
 
 ####################

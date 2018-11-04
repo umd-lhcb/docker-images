@@ -1,7 +1,8 @@
 # vim:set ft=dockerfile:
 
-# Use CERN's official slc6
-FROM hepsw/slc-base
+# Use LHCb's slc6
+FROM hepsw/lhcb-base
+USER root
 
 #################
 # Update system #
@@ -10,8 +11,7 @@ FROM hepsw/slc-base
 # Make slc6 work inside the LayeredFS
 # This is an known bug. Go to the following url for more info:
 #   https://docs.oracle.com/cd/E93554_01/E69348/html/uek4-czc_xmc_xt.html
-RUN touch /var/lib/rpm/*
-RUN yum install -y yum-plugin-ovl
+RUN yum install -y yum-plugin-ovl; yum clean all
 
 RUN yum update -y && \
     yum clean all && rm -rf /var/cache/yum
@@ -37,20 +37,18 @@ RUN yum install -y \
     zsh tmux emacs vim \
     && yum clean all && rm -rf /var/cache/yum
 
-# Update pip
-RUN pip install --upgrade pip setuptools
-
 
 #########################
 # Install LHCb packages #
 #########################
 
-RUN mkdir -p /opt/lhcb
+ENV MYSITEROOT /opt/lhcb-sw
+ENV PATH       $MYSITEROOT/usr/bin:$PATH
+#ENV CMTCONFIG  x86_64-slc6-gcc49-opt
 
-RUN pip install lbinstall
-
-RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
-RUN lbinstall --root=/opt/lhcb install DAVINCI_v36r1p5_x86_64_slc6_gcc49_opt
+RUN lbpkr install-project DAVINCI v36r1p2 && \
+    /bin/rm -rf $MYSITEROOT/{tmp,targz} && \
+    /bin/mkdir ${MYSITEROOT}/{tmp,targz}
 
 
 ###############################

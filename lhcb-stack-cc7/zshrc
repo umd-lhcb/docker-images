@@ -454,5 +454,6 @@ if [[ -f $HOME/.zshrc.host ]]; then
 fi
 
 source /opt/lhcb/LbLogin.sh
+export LD_LIBRARY_PATH=/opt/lhcb/lcg/releases/gcc/6.2.0/x86_64-centos7/lib64:$LD_LIBRARY_PATH
 
 #}}}

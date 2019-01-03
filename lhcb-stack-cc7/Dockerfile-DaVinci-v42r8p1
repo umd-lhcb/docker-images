@@ -34,7 +34,7 @@ RUN yum install -y \
     xz-devel lcov \
     bzip2 zip \
     python-pip python-devel \
-    distcc ccache make cmake gcc-c++ \
+    distcc ccache make cmake3 gcc-c++ \
     git subversion \
     zsh tmux emacs vim \
     && yum clean all && rm -rf /var/cache/yum

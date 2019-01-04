@@ -70,17 +70,25 @@ RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
 # Make our own DaVinci #
 ########################
 
-RUN mkdir -p /build && cd /build
+RUN mkdir -p /build
+WORKDIR /build
 
 # Setup ENVs
-RUN . /opt/lhcb/LbLogin.sh
 ENV LD_LIBRARY_PATH="/opt/lhcb/lcg/releases/gcc/6.2.0/x86_64-centos7/lib64:${PATH}"
 
-RUN lb-dev DaVinci/v42r8p1 && cd DaVinciDev_v42r8p1
-RUN git lb-use Analysis
-RUN git lb-checkout Analysis/v18r8p1 Phys/DecayTreeTuple
-RUN make configure && make install
-RUN cp -r InstallArea /opt/lhcb/lhcb/DAVINCI_v42r8p1/
+RUN . /opt/lhcb/LbLogin.sh && \
+    git config --global user.name "Physicist" && \
+    git config --global user.email "lhcb@physics.umd.edu" && \
+    lb-dev DaVinci/v42r8p1 && cd DaVinciDev_v42r8p1 && \
+    git lb-use Analysis && \
+    git lb-checkout Analysis/v18r8p1 Phys/DecayTreeTuple && \
+    make configure && make install
+
+# Install the compiled files to existing DaVinci
+RUN cp -r ./DaVinciDev_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib/*.so \
+        /opt/lhcb/lhcb/DAVINCI/DAVINCI_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib/ && \
+    cp -r ./DaVinciDev_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/python \
+        /opt/lhcb/lhcb/DAVINCI/DAVINCI_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/
 
 
 #############################

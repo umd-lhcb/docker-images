@@ -72,7 +72,7 @@ ADD ./tmux.conf /home/physicist/.tmux.conf
 # Add the bootstrap script
 ADD ./bootstrap.sh /usr/local/bin
 
-# Make UID and GID ENV, also delete 'builder'
+# Make UID and GID ENV
 ENV UID 1000
 ENV GID 985
 

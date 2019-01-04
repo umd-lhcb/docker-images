@@ -62,6 +62,9 @@ RUN lbinstall --root=/opt/lhcb install DAVINCI_v42r8p1_x86_64_centos7_gcc62_opt
 ADD ./zshrc /home/physicist/.zshrc
 ADD ./tmux.conf /home/physicist/.tmux.conf
 
+# Make sure 'cmake' is linked to 'cmake3'
+RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
+
 
 #############################
 # Bootstrap user permission #

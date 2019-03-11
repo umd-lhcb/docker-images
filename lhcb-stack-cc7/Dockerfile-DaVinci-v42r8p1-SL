@@ -73,9 +73,6 @@ RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
 RUN mkdir -p /build
 WORKDIR /build
 
-# Setup ENVs
-ENV LD_LIBRARY_PATH="/opt/lhcb/lcg/releases/gcc/6.2.0/x86_64-centos7/lib64:${PATH}"
-
 RUN . /opt/lhcb/LbLogin.sh && \
     git config --global user.name "Physicist" && \
     git config --global user.email "lhcb@physics.umd.edu" && \
@@ -94,19 +91,10 @@ RUN . /opt/lhcb/LbLogin.sh && \
     cd DaVinciDev_v42r8p1 && \
     make configure && make install
 
-# Install the compiled files to existing DaVinci
-RUN cp -r ./DaVinciDev_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib/*.so \
-        /opt/lhcb/lhcb/DAVINCI/DAVINCI_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib && \
-    cp -r ./DaVinciDev_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/python \
-        /opt/lhcb/lhcb/DAVINCI/DAVINCI_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt && \
-    cat ./DaVinciDev_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib/DaVinciDev.components >> \
-        /opt/lhcb/lhcb/DAVINCI/DAVINCI_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib/DaVinci.components && \
-    cat ./DaVinciDev_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib/DaVinciDev.confdb >> \
-        /opt/lhcb/lhcb/DAVINCI/DAVINCI_v42r8p1/InstallArea/x86_64-centos7-gcc62-opt/lib/DaVinci.confdb
-
 # Cleanups
 WORKDIR /
-RUN rm -rf /build
+RUN rm -rf /build/TupleToolSemiLeptonic && rm -rf /build/DaVinciDev_v42r8p1/InstallArea
+RUN echo "export PATH=/build/DaVinciDev_v42r8p1/build.x86_64-centos7-gcc62-opt:\$PATH" >> /home/physicist/.zshrc
 
 #############################
 # Bootstrap user permission #

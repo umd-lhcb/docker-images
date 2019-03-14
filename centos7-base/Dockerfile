@@ -18,7 +18,7 @@ RUN rpm --import /tmp/RPM-GPG-KEY-cern && \
     rm /tmp/RPM-GPG-KEY-cern
 
 # Enable EPEL repo
-RUN yum install epel-release
+RUN yum install -y epel-release
 
 RUN yum update -y && \
     yum clean all && rm -rf /var/cache/yum

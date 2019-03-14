@@ -58,3 +58,17 @@ ADD ./tmux.conf /home/physicist/.tmux.conf
 
 # Make sure 'cmake' is linked to 'cmake3'
 RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
+
+
+#############################
+# Bootstrap user permission #
+#############################
+
+# Add the bootstrap script
+ADD ./bootstrap.sh /usr/local/bin
+
+# Make UID and GID ENV
+ENV UID 1000
+ENV GID 985
+
+CMD ["/usr/local/bin/bootstrap.sh"]

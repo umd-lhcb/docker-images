@@ -70,6 +70,9 @@ RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
 # Make our own DaVinci #
 ########################
 
+# I know, it's a bad idea to put token inside a docker. But this one is restricted.
+ENV GITLAB_TOKEN berHk8dhDeVYKCSjhk9x
+
 RUN mkdir -p /build
 WORKDIR /build
 
@@ -78,7 +81,9 @@ RUN . /opt/lhcb/LbLogin.sh && \
     git config --global user.email "lhcb@physics.umd.edu" && \
     lb-dev DaVinci/v42r8p1 && cd DaVinciDev_v42r8p1 && \
     git lb-use Analysis && \
-    git lb-checkout Analysis/v18r8p1 Phys/DecayTreeTuple
+    git lb-use SemileptonicCommonTools https://oauth2:$GITLAB_TOKEN@gitlab.cern.ch/lhcb-slb/SemileptonicCommonTools.git && \
+    git lb-checkout Analysis/v18r8p1 Phys/DecayTreeTuple && \
+    git lb-checkout SemileptonicCommonTools/master Phys/SemileptonicCommonTools
 
 # Clone TupleToolSemiLeptonic
 WORKDIR /build
@@ -89,11 +94,11 @@ RUN cp TupleToolSemiLeptonic/*.{cpp,h} /build/DaVinciDev_v42r8p1/Phys/DecayTreeT
 # Compile TupleToolApplyIsolation & other stuff
 RUN . /opt/lhcb/LbLogin.sh && \
     cd DaVinciDev_v42r8p1 && \
-    make configure && make install
+    make configure && make
 
 # Cleanups
 WORKDIR /
-RUN rm -rf /build/TupleToolSemiLeptonic && rm -rf /build/DaVinciDev_v42r8p1/InstallArea
+RUN rm -rf /build/TupleToolSemiLeptonic
 RUN echo "export PATH=/build/DaVinciDev_v42r8p1/build.x86_64-centos7-gcc62-opt:\$PATH" >> /home/physicist/.zshrc
 
 #############################

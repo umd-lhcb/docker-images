@@ -30,7 +30,9 @@ RUN yum update -y && \
 
 RUN yum install -y \
     CERN-CA-certs \
-    python-pip make cmake3 gcc gcc-c++ git \
+    make cmake3 gcc gcc-c++ \
+    python-devel xz-devel \
+    python-pip git \
     zsh tmux \
     && yum clean all && rm -rf /var/cache/yum
 
@@ -43,9 +45,7 @@ RUN pip install --upgrade pip setuptools
 #####################
 
 RUN mkdir -p /opt/lhcb
-
 RUN pip install lbinstall
-
 RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
 
 

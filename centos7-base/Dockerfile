@@ -32,6 +32,8 @@ RUN yum install -y \
     CERN-CA-certs \
     make cmake3 gcc gcc-c++ \
     python-devel xz-devel \
+    libSM libX11 libXext libXpm libXft libXaw libxslt libjpeg-turbo \
+    xorg-x11-xauth xorg-x11-server-Xvfb \
     python-pip git \
     zsh tmux \
     && yum clean all && rm -rf /var/cache/yum

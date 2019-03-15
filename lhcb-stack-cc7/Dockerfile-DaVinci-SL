@@ -2,7 +2,7 @@
 
 ARG DAVINCI_VERSION=v42r8p1
 ARG ANALYSIS_VERSION=v18r8p1
-ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
+ARG GCC_DEPENDENCY=x86_64-centos7-gcc62-opt
 
 FROM ypsunumd/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
 
@@ -16,7 +16,7 @@ ARG GCC_DEPENDENCY
 ########################
 
 # I know, it's a bad idea to put token inside a docker. But this one is restricted.
-ENV GITLAB_TOKEN berHk8dhDeVYKCSjhk9x
+ARG GITLAB_TOKEN=berHk8dhDeVYKCSjhk9x
 
 RUN mkdir -p /build
 WORKDIR /build
@@ -26,7 +26,7 @@ RUN . /opt/lhcb/LbLogin.sh && \
     git config --global user.email "lhcb@physics.umd.edu" && \
     lb-dev DaVinci/${DAVINCI_VERSION} && cd DaVinciDev_${DAVINCI_VERSION} && \
     git lb-use Analysis && \
-    git lb-use SemileptonicCommonTools https://oauth2:$GITLAB_TOKEN@gitlab.cern.ch/lhcb-slb/SemileptonicCommonTools.git && \
+    git lb-use SemileptonicCommonTools https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-slb/SemileptonicCommonTools.git && \
     git lb-checkout Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTuple && \
     git lb-checkout SemileptonicCommonTools/master Phys/SemileptonicCommonTools
 

@@ -1,0 +1,8 @@
+# vim:set ft=dockerfile:
+
+ARG DAVINCI_VERSION=v42r8p1
+ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
+
+FROM ypsunumd/centos7-base:latest
+
+RUN lbinstall --root=/opt/lhcb install DAVINCI_${DAVINCI_VERSION}_${GCC_DEPENDENCY}

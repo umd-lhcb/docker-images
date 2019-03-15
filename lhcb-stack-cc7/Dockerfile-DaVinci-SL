@@ -11,9 +11,9 @@ ARG DAVINCI_VERSION
 ARG ANALYSIS_VERSION
 ARG GCC_DEPENDENCY
 
-########################
-# Make our own DaVinci #
-########################
+##################
+# Extend DaVinci #
+##################
 
 # I know, it's a bad idea to put token inside a docker. But this one is restricted.
 ARG GITLAB_TOKEN=berHk8dhDeVYKCSjhk9x

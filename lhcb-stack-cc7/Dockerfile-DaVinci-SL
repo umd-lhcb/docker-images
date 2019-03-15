@@ -1,6 +1,10 @@
 # vim:set ft=dockerfile:
 
-FROM ypsunumd/lhcb-stack-cc7:DaVinci-v42r8p1
+ARG DAVINCI_VERSION=v42r8p1
+ARG ANALYSIS_VERSION=v18r8p1
+ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
+
+FROM ypsunumd/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
 
 ########################
 # Make our own DaVinci #
@@ -15,20 +19,20 @@ WORKDIR /build
 RUN . /opt/lhcb/LbLogin.sh && \
     git config --global user.name "Physicist" && \
     git config --global user.email "lhcb@physics.umd.edu" && \
-    lb-dev DaVinci/v42r8p1 && cd DaVinciDev_v42r8p1 && \
+    lb-dev DaVinci/${DAVINCI_VERSION} && cd DaVinciDev_${DAVINCI_VERSION} && \
     git lb-use Analysis && \
     git lb-use SemileptonicCommonTools https://oauth2:$GITLAB_TOKEN@gitlab.cern.ch/lhcb-slb/SemileptonicCommonTools.git && \
-    git lb-checkout Analysis/v18r8p1 Phys/DecayTreeTuple && \
+    git lb-checkout Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTuple && \
     git lb-checkout SemileptonicCommonTools/master Phys/SemileptonicCommonTools
 
 # Clone TupleToolSemiLeptonic
 RUN git clone https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
-    cp TupleToolSemiLeptonic/*.{cpp,h} /build/DaVinciDev_v42r8p1/Phys/DecayTreeTuple/src && \
-    cp TupleToolSemiLeptonic/CMakeLists.txt /build/DaVinciDev_v42r8p1/Phys/DecayTreeTuple
+    cp TupleToolSemiLeptonic/*.{cpp,h} /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple/src && \
+    cp TupleToolSemiLeptonic/CMakeLists.txt /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple
 
 # Compile TupleToolApplyIsolation & other stuff
 RUN . /opt/lhcb/LbLogin.sh && \
-    cd DaVinciDev_v42r8p1 && \
+    cd DaVinciDev_${DAVINCI_VERSION} && \
     make configure && make
 
 # Cleanups
@@ -40,4 +44,4 @@ RUN rm -rf /build/TupleToolSemiLeptonic
 ########################
 
 # Update $PATH in zsh
-RUN echo "export PATH=/build/DaVinciDev_v42r8p1/build.x86_64-centos7-gcc62-opt:\$PATH" >> /home/physicist/.zshrc
+RUN echo "export PATH=/build/DaVinciDev_${DAVINCI_VERSION}/build.${GCC_DEPENDENCY}:\$PATH" >> /home/physicist/.zshrc

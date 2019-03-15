@@ -5,4 +5,7 @@ ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
 
 FROM ypsunumd/centos7-base:latest
 
+ARG DAVINCI_VERSION
+ARG GCC_DEPENDENCY
+
 RUN lbinstall --root=/opt/lhcb install DAVINCI_${DAVINCI_VERSION}_${GCC_DEPENDENCY}

@@ -6,6 +6,11 @@ ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
 
 FROM ypsunumd/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
 
+# Make the ARG values defined in the previous stage accessible
+ARG DAVINCI_VERSION
+ARG ANALYSIS_VERSION
+ARG GCC_DEPENDENCY
+
 ########################
 # Make our own DaVinci #
 ########################

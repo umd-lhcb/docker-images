@@ -46,9 +46,11 @@ RUN pip install --upgrade pip setuptools
 # Install LHCb base #
 #####################
 
-RUN mkdir -p /opt/lhcb
+RUN mkdir -p /opt/lhcb && \
+    mkdir -p /tmp/lbinstall-tmp && \
+    mkdir -p /tmp/lbinstall-cache
 RUN pip install lbinstall
-RUN lbinstall --root=/opt/lhcb install LBSCRIPT CMT COMPAT
+RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache install LBSCRIPT CMT COMPAT
 
 
 ###############################
@@ -60,6 +62,14 @@ ADD ./tmux.conf /home/physicist/.tmux.conf
 
 # Make sure 'cmake' is linked to 'cmake3'
 RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
+
+
+############
+# Cleanups #
+############
+
+RUN rm -rf /tmp/* && \
+    rm /anaconda-post.log
 
 
 #############################

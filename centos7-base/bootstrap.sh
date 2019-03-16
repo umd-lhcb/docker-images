@@ -3,7 +3,7 @@
 # Add a user with correct uid and gid at runtime
 #mkdir -p /home/physicist
 
-echo "physicist:x:${UID}:${GID}:Physicist,,,:/home/physicist:/usr/bin/zsh" >> \
+echo "physicist:x:${UID}:${GID}:Physicist:/home/physicist:/usr/bin/zsh" >> \
     /etc/passwd
 echo "physicist:x:${GID}:" >> /etc/group
 

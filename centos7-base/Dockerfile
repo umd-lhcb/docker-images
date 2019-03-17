@@ -50,7 +50,8 @@ RUN mkdir -p /opt/lhcb && \
     mkdir -p /tmp/lbinstall-tmp && \
     mkdir -p /tmp/lbinstall-cache
 RUN pip install lbinstall
-RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache install LBSCRIPTS CMT COMPAT
+RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
+        install LBSCRIPTS CMT COMPAT DBASE_LbEnvFix_v1r2
 
 
 ###############################

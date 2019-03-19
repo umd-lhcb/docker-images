@@ -3,7 +3,7 @@
 ARG DAVINCI_VERSION=v42r8p1
 ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
 
-FROM ypsunumd/centos7-base:latest
+FROM umdlhcb/centos7-base:latest
 
 ARG DAVINCI_VERSION
 ARG GCC_DEPENDENCY

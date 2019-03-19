@@ -8,4 +8,11 @@ FROM umdlhcb/centos7-base:latest
 ARG DAVINCI_VERSION
 ARG GCC_DEPENDENCY
 
-RUN lbinstall --root=/opt/lhcb install DAVINCI_${DAVINCI_VERSION}_${GCC_DEPENDENCY}
+# Install DaVinci
+RUN mkdir -p /tmp/lbinstall-tmp && \
+    mkdir -p /tmp/lbinstall-cache
+RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
+        install DAVINCI_${DAVINCI_VERSION}_${GCC_DEPENDENCY}
+
+# Cleanups
+RUN rm -rf /tmp/*

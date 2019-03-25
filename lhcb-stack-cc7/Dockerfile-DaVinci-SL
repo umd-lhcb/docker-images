@@ -19,7 +19,7 @@ ARG GCC_DEPENDENCY
 RUN lbinstall --root=/opt/lhcb install DBASE_LbEnvFix_v1r2
 
 # Cleanups
-RUN rm -rf /tmp/* &&
+RUN rm -rf /tmp/* && \
     rm -rf /opt/lhcb/var/cache
 
 

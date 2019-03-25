@@ -11,6 +11,18 @@ ARG DAVINCI_VERSION
 ARG ANALYSIS_VERSION
 ARG GCC_DEPENDENCY
 
+############
+# Backport #
+############
+
+# Add missing library
+RUN lbinstall --root=/opt/lhcb install DBASE_LbEnvFix_v1r2
+
+# Cleanups
+RUN rm -rf /tmp/* &&
+    rm -rf /opt/lhcb/var/cache
+
+
 ##################
 # Extend DaVinci #
 ##################

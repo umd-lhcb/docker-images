@@ -2,7 +2,7 @@
 Custom dockers images for UMD LHCb group analyses.
 
 
-## hep_ml
+## `hep_ml`
 * On Linux:
 ```
 docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/hep_ml:<tag>
@@ -10,7 +10,7 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 * On Windows: Make sure `PuTTY` and `Xming` are installed, and replace `$XAUTHORITY` with a hard-coded `~/.Xauthority`.
 
 
-## lhcb-stack-cc
+## `lhcb-stack-cc7`
 * On Linux:
 ```
 docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/lhcb-stack-cc7:<tag>
@@ -38,6 +38,6 @@ By default, `DAVINCI_VERSION=v42r8p1`, `ANALYSIS_VERSION=v18r8p1`, and
 `GCC_DEPENDENCY=x86_64-centos7-gcc62-opt`.
 
 
-## centos7-base
-This provides a base image for all `lhcb-stack-cc` images. It has all runtime
+## `centos7-base`
+This provides a base image for all `lhcb-stack-cc7` images. It has all runtime
 dependencies installed. This image should not be used by end user.

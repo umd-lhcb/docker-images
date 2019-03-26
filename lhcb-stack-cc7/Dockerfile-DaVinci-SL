@@ -1,7 +1,7 @@
 # vim:set ft=dockerfile:
 
-ARG DAVINCI_VERSION=v42r8p1
-ARG ANALYSIS_VERSION=v18r8p1
+ARG DAVINCI_VERSION=v44r8
+ARG ANALYSIS_VERSION=v20r7
 ARG GCC_DEPENDENCY=x86_64-centos7-gcc62-opt
 
 FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
@@ -17,6 +17,10 @@ ARG GCC_DEPENDENCY
 
 # I know, it's a bad idea to put token inside a docker. But this one is restricted.
 ARG GITLAB_TOKEN=berHk8dhDeVYKCSjhk9x
+
+# Setup ENVs
+ENV PATH="/opt/lhcb/lcg/releases/gcc/6.2.0/x86_64-centos7/bin:${PATH}"
+ENV LD_LIBRARY_PATH="/opt/lhcb/lcg/releases/gcc/6.2.0/x86_64-centos7/lib64"
 
 RUN mkdir -p /build
 WORKDIR /build

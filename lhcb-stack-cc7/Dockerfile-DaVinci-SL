@@ -19,8 +19,13 @@ ARG GCC_DEPENDENCY
 RUN lbinstall --root=/opt/lhcb install DBASE_LbEnvFix_v1r2
 
 # Cleanups
-RUN rm -rf /tmp/* && \
-    rm -rf /opt/lhcb/var/cache
+RUN rm -rf /tmp/*
+
+# Install 'cmake3' and make it default
+RUN yum remove -y cmake && yum install -y cmake3 \
+    && yum clean all && rm -rf /var/cache/yum
+
+RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 
 ##################

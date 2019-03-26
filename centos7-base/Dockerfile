@@ -30,7 +30,7 @@ RUN yum update -y && \
 
 RUN yum install -y \
     CERN-CA-certs \
-    make cmake3 gcc gcc-c++ \
+    make gcc gcc-c++ \
     python-devel xz-devel \
     libSM libX11 libXext libXpm libXft libXaw libxslt libjpeg-turbo \
     xorg-x11-xauth xorg-x11-server-Xvfb \
@@ -51,7 +51,7 @@ RUN mkdir -p /opt/lhcb && \
     mkdir -p /tmp/lbinstall-cache
 RUN pip install lbinstall
 RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
-        install LBSCRIPTS CMT COMPAT
+        install LBSCRIPTS CMT COMPAT LCG_93_CMake_3.7.0_x86_64_centos7_gcc7_opt LCG_93_CMake_3.7.0_x86_64_centos7_gcc62_opt
 
 
 ###############################
@@ -60,9 +60,6 @@ RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbin
 
 ADD ./zshrc /home/physicist/.zshrc
 ADD ./tmux.conf /home/physicist/.tmux.conf
-
-# Make sure 'cmake' is linked to 'cmake3'
-RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 
 ############

@@ -15,11 +15,9 @@ ARG GCC_DEPENDENCY
 # Backport #
 ############
 
-# Add missing library
-RUN lbinstall --root=/opt/lhcb install DBASE_LbEnvFix_v1r2
-
 # Cleanups
-RUN rm -rf /tmp/*
+RUN rm -rf /tmp/* && \
+    rm -rf /opt/lhcb/var/cache
 
 # Install 'cmake3' and make it default
 RUN yum remove -y cmake && yum install -y cmake3 \

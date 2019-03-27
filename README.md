@@ -1,13 +1,6 @@
 # docker-images
-Custom dockers images for UMD LHCb group analyses.
-
-
-## `hep_ml`
-* On Linux:
-```
-docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/hep_ml:<tag>
-```
-* On Windows: Make sure `PuTTY` and `Xming` are installed, and replace `$XAUTHORITY` with a hard-coded `~/.Xauthority`.
+Custom dockers images for UMD LHCb group analyses. This is a special branch for
+adding semileptonic tools to an old existing image with `DaVinci/v42r8p1`.
 
 
 ## `lhcb-stack-cc7`
@@ -16,23 +9,12 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/lhcb-stack-cc7:<tag>
 ```
 
-### Build instruction for `Dockefile-DaVinci`
-This build file installs specified official DaVinci to the docker image. To
-build:
-```
-docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<dep>  -t <tag_name> -f Dockerfile-DaVinci .
-```
-
-By default, `DAVICI_VERSION=v42r8p1`, and `GCC_DEPENDENCY=x86_64_centos7_gcc62_opt`.
-
-### Build instruction for `Dockerfile-DaVinci-SL`
+### Build instruction for `Dockefile-DaVinci-SL`
 This build file installed some tools for semileptonic analyses into a copy of
-existing DaVinci docker image. This requires to build an image with
-`Docker-DaVinci` of the same DaVinci version first.
-
-The build command is mostly similar to
-[the previous section](#build-instruction-for-dockerfile-davinci), the
-only notable difference is that now we have 3 optional arguments.
+existing DaVinci docker image `DaVinci-v42r8p1-20190104`. To build:
+```
+docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<dep>  -t <tag_name> -f Dockerfile-DaVinci-SL .
+```
 
 By default, `DAVINCI_VERSION=v42r8p1`, `ANALYSIS_VERSION=v18r8p1`, and
 `GCC_DEPENDENCY=x86_64-centos7-gcc62-opt`.

@@ -18,9 +18,3 @@ docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<de
 
 By default, `DAVINCI_VERSION=v42r8p1`, `ANALYSIS_VERSION=v18r8p1`, and
 `GCC_DEPENDENCY=x86_64-centos7-gcc62-opt`.
-
-
-## `centos7-base`
-This provides an alternative base image for all `lhcb-stack-cc7` images,
-compared to CERN's offical CERN CentOS 7 docker image. It has all runtime
-dependencies installed. This image should not be used by end user.

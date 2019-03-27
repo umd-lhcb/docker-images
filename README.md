@@ -20,7 +20,7 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 This build file installs specified official DaVinci to the docker image. To
 build:
 ```
-docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<dep>  -t <tag_name> -f Dockerfile-DaVinci-SL .
+docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<dep>  -t <tag_name> -f Dockerfile-DaVinci .
 ```
 
 By default, `DAVICI_VERSION=v42r8p1`, and `GCC_DEPENDENCY=x86_64_centos7_gcc62_opt`.

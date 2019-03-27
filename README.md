@@ -20,10 +20,10 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 This build file installs specified official DaVinci to the docker image. To
 build:
 ```
-docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<dep>  -t <tag_name> -f Dockerfile-DaVinci-SL .
+docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<dep>  -t <tag_name> -f Dockerfile-DaVinci .
 ```
 
-By default, `DAVICI_VERSION=v42r8p1`, and `GCC_DEPENDENCY=x86_64_centos7_gcc62_opt`.
+By default, `DAVICI_VERSION=v44r10`, and `GCC_DEPENDENCY=x86_64_centos7_gcc62_opt`.
 
 ### Build instruction for `Dockerfile-DaVinci-SL`
 This build file installed some tools for semileptonic analyses into a copy of
@@ -34,7 +34,7 @@ The build command is mostly similar to
 [the previous section](#build-instruction-for-dockerfile-davinci), the
 only notable difference is that now we have 3 optional arguments.
 
-By default, `DAVINCI_VERSION=v42r8p1`, `ANALYSIS_VERSION=v18r8p1`, and
+By default, `DAVINCI_VERSION=v44r10`, `ANALYSIS_VERSION=v20r9`, and
 `GCC_DEPENDENCY=x86_64-centos7-gcc62-opt`.
 
 

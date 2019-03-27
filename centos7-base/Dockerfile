@@ -51,7 +51,10 @@ RUN mkdir -p /opt/lhcb && \
     mkdir -p /tmp/lbinstall-cache
 RUN pip install lbinstall
 RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
-        install LBSCRIPTS CMT COMPAT LCG_93_CMake_3.7.0_x86_64_centos7_gcc7_opt LCG_93_CMake_3.7.0_x86_64_centos7_gcc62_opt
+        install LBSCRIPTS CMT COMPAT && \
+    # Cleanups
+    rm -rf /tmp/* && \
+    rm /anaconda-post.log
 
 
 ###############################
@@ -60,14 +63,6 @@ RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbin
 
 ADD ./zshrc /home/physicist/.zshrc
 ADD ./tmux.conf /home/physicist/.tmux.conf
-
-
-############
-# Cleanups #
-############
-
-RUN rm -rf /tmp/* && \
-    rm /anaconda-post.log
 
 
 #############################

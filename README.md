@@ -39,5 +39,6 @@ By default, `DAVINCI_VERSION=v44r10`, `ANALYSIS_VERSION=v20r9`, and
 
 
 ## `centos7-base`
-This provides a base image for all `lhcb-stack-cc7` images. It has all runtime
+This provides an alternative base image for all `lhcb-stack-cc7` images,
+compared to CERN's offical CERN CentOS 7 docker image. It has all runtime
 dependencies installed. This image should not be used by end user.

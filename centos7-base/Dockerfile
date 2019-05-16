@@ -1,7 +1,7 @@
 # vim:set ft=dockerfile:
 
 # Use official centos7 image, CERN's is way too big
-FROM centos:7
+FROM centos:centos7
 
 # Use CERN's official centos7
 #FROM gitlab-registry.cern.ch/lhcb-docker/os-base/centos7-hepos:latest

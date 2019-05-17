@@ -18,10 +18,15 @@ RUN rpm --import /tmp/RPM-GPG-KEY-cern && \
     rm /tmp/RPM-GPG-KEY-cern
 
 # Enable EPEL repo
-RUN yum install -y epel-release
+RUN yum install -y epel-release && \
+    yum distro-sync -y
 
 RUN yum update -y && \
     yum clean all && rm -rf /var/cache/yum
+
+RUN if [ -f /etc/yum.repos.d/CentOS-CERN.repo.rpmnew ]; then \
+    mv /etc/yum.repos.d/CentOS-CERN.repo.rpmnew /etc/yum.repos.d/CentOS-CERN.repo; \
+    fi;
 
 
 ####################

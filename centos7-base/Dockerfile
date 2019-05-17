@@ -36,6 +36,8 @@ RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" && \
     rm /tmp/get-pip.py
 
 # Install 'cmake3' and make it default
+RUN yum install -y epel-release && \
+    yum clean all && rm -rf /var/cache/yum
 RUN yum install -y cmake3  && \
     yum clean all && rm -rf /var/cache/yum
 RUN ln -s /usr/bin/cmake3 /usr/bin/cmake

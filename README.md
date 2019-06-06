@@ -9,7 +9,7 @@ adding semileptonic tools to an old existing image with `DaVinci/v42r8p1`.
 docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/lhcb-stack-cc7:<tag>
 ```
 
-### Build instruction for `Dockefile-DaVinci-SL`
+### Build instruction for `Dockerfile-DaVinci-SL`
 This build file installed some tools for semileptonic analyses into a copy of
 existing DaVinci docker image `DaVinci-v42r8p1-20190104`. To build:
 ```

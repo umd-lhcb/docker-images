@@ -15,6 +15,9 @@ ENV LC_ALL "en_US.UTF-8"
 # Update, just in case
 RUN pacman -Syu --noconfirm
 
+# Install dev tools
+RUN pacman -S --noconfirm base-devel
+
 # Set makepkg flags
 RUN echo 'MAKEFLAGS="-j6"' >> /etc/makepkg.conf
 

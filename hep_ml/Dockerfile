@@ -89,6 +89,9 @@ RUN yay -S --noconfirm root
 # Install hep_ml
 RUN yay -S --noconfirm python-hep_ml
 
+# Install a python-ROOT file IO interface
+RUN yay -S --noconfirm python-uproot
+
 
 #################################################
 # Load default configurations for some programs #

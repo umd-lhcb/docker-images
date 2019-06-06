@@ -1,6 +1,6 @@
 # vim:set ft=dockerfile:
 
-ARG DAVINCI_VERSION=v44r10
+ARG DAVINCI_VERSION=v44r10p2
 ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
 
 FROM umdlhcb/centos7-base:latest

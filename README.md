@@ -16,7 +16,7 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/lhcb-stack-cc7:<tag>
 ```
 
-### Build instruction for `Dockefile-DaVinci`
+### Build instruction for `Dockerfile-DaVinci`
 This build file installs specified official DaVinci to the docker image. To
 build:
 ```

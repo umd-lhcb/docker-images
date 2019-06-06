@@ -1,5 +1,5 @@
 # Use a Archlinux base
-FROM archimg/base-devel
+FROM archlinux/base:latest
 
 #########################
 # System initialization #

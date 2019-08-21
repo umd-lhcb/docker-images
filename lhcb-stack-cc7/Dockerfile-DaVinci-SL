@@ -46,7 +46,7 @@ RUN . /opt/lhcb/LbLogin.sh && \
     git lb-checkout SemileptonicCommonTools/master Phys/SemileptonicCommonTools
 
 # Clone TupleToolSemiLeptonic
-RUN git clone https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
+RUN git clone --depth 1 --branch 0.1 https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
     cp TupleToolSemiLeptonic/*.{cpp,h} /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple/src && \
     cp TupleToolSemiLeptonic/CMakeLists.txt /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple
 

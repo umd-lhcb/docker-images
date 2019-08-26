@@ -15,6 +15,3 @@ existing DaVinci docker image `DaVinci-v42r8p1-20190104`. To build:
 ```
 docker build -t <tag_name> -f Dockerfile-DaVinci-SL .
 ```
-
-By default, `DAVINCI_VERSION=v42r8p1`, `ANALYSIS_VERSION=v18r8p1`, and
-`GCC_DEPENDENCY=x86_64-centos7-gcc62-opt`.

@@ -13,7 +13,7 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 This build file installed some tools for semileptonic analyses into a copy of
 existing DaVinci docker image `DaVinci-v42r8p1-20190104`. To build:
 ```
-docker build --build-arg DAVINCI_VERSON=<version> --build-arg GCC_DEPENDENCY=<dep>  -t <tag_name> -f Dockerfile-DaVinci-SL .
+docker build -t <tag_name> -f Dockerfile-DaVinci-SL .
 ```
 
 By default, `DAVINCI_VERSION=v42r8p1`, `ANALYSIS_VERSION=v18r8p1`, and

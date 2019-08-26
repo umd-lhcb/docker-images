@@ -30,33 +30,24 @@ RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
 # Extend DaVinci #
 ##################
 
-# I know, it's a bad idea to put token inside a docker. But this one is restricted.
-ARG GITLAB_TOKEN=berHk8dhDeVYKCSjhk9x
-
 RUN mkdir -p /build
 WORKDIR /build
 
 RUN . /opt/lhcb/LbLogin.sh && \
     git config --global user.name "Physicist" && \
     git config --global user.email "lhcb@physics.umd.edu" && \
-    lb-dev DaVinci/${DAVINCI_VERSION} && cd DaVinciDev_${DAVINCI_VERSION} && \
-    git lb-use Analysis && \
-    git lb-use SemileptonicCommonTools https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-slb/SemileptonicCommonTools.git && \
-    git lb-checkout Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTuple && \
-    git lb-checkout SemileptonicCommonTools/master Phys/SemileptonicCommonTools
+    lb-dev DaVinci/${DAVINCI_VERSION}
 
-# Clone TupleToolSemiLeptonic
-RUN git clone --depth 1 --branch 0.1 https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
-    cp TupleToolSemiLeptonic/*.{cpp,h} /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple/src && \
-    cp TupleToolSemiLeptonic/CMakeLists.txt /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple
+# Check out TupleToolSemiLeptonic
+RUN . /opt/lhcb/LbLogin.sh && \
+    cd DaVinciDev_${DAVINCI_VERSION} && \
+    git lb-use TupleToolSemiLeptonic https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
+    git lb-checkout TupleToolSemiLeptonic/0.1.1 Phys/TupleToolSemiLeptonic
 
 # Compile TupleToolApplyIsolation & other stuff
 RUN . /opt/lhcb/LbLogin.sh && \
     cd DaVinciDev_${DAVINCI_VERSION} && \
     make configure && make
-
-# Cleanups
-RUN rm -rf /build/TupleToolSemiLeptonic
 
 
 ########################

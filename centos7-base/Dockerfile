@@ -6,6 +6,7 @@ FROM centos:centos7
 # Use CERN's official centos7
 #FROM gitlab-registry.cern.ch/lhcb-docker/os-base/centos7-hepos:latest
 
+
 #################
 # Update system #
 #################

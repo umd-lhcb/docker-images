@@ -45,257 +45,26 @@ if {$force_conservative} {
 set timeout -1
 spawn ./Libero_SoC_v12.2_lin.bin LAX_VM /usr/lib/jvm/jre-openjdk/bin/java
 match_max 100000
-expect -exact "Preparing to install\r
-Extracting the JRE from the installer archive...\r
-Unpacking the JRE...\r
-Extracting the installation resources from the installer archive...\r
-Configuring the installer for this system's environment...\r
-\r
-Launching installer...\r
-\r
-\r
-Graphical installers are not supported by the VM. The console mode will be used instead...\r
-\r
-===============================================================================\r
-Libero SoC v12.2                                 (created with InstallAnywhere)\r
--------------------------------------------------------------------------------\r
-\r
-Preparing CONSOLE Mode Installation...\r
-\r
-\r
-\r
-\r
-===============================================================================\r
-Introduction\r
-------------\r
-\r
-Installer will guide you through the installation of Libero SoC v12.2.\r
-\r
-It is strongly recommended that you quit all programs before continuing with \r
-this installation.\r
-\r
-Respond to each prompt to proceed to the next step in the installation.  If \r
-you want to change something on a previous step, type 'back'.\r
-\r
-You may cancel this installation at any time by typing 'quit'.\r
-\r
-PRESS <ENTER> TO CONTINUE: "
+expect -gl "*PRESS <ENTER> TO CONTINUE: "
 send -- "\r"
-expect -exact "\r
-\r
-\r
-\r
-===============================================================================\r
-License Agreement\r
------------------\r
-\r
-Installation and Use of Libero SoC v12.2 Requires Acceptance of the Following \r
-License Agreement:\r
-\r
-\r
-\r
-MICROSEMI SOC CORP. LIBERO SOFTWARE LICENSE AGREEMENT\r
-\r
-THIS DOCUMENT INCLUDES THE FOLLOWING:\r
-1) MICROSEMI SOC CORP. LIBERO SOFTWARE LICENSE AGREEMENT, is comprised of \r
-Microsemi SoC Corp.’s controlling use restrictions and terms and conditions \r
-for associated third party license agreements, copyright notices and source \r
-acknowledgments, as may be amended from time to time,(“Third Party Document”).\r
-The current version of each Third Party Document is set forth in a separate \r
-Exhibit attached to the agreement.\r
-A)	MICROSEMI SOC CORP. CONTROLLING USE RESTRICTIONS AND TERMS AND CONDITIONS \r
-FOR ASSOCIATED THIRD PARTY LICENSE AGREEMENTS\r
-B) THIRD-PARTY LICENSE AGREEMENTS, COPYRIGHTS, AND SOURCE ACKNOWLEDGEMENTS FOR\r
-PRODUCTS INCLUDED WITH LIBERO\r
-I) SYNOPSYS SOFTWARE LICENSE AGREEMENT FOR SYNPLICITY SOFTWARE PRODUCTS \r
-(EXHIBIT A)\r
-II) MENTOR GRAPHICS (EXHIBIT B)\r
-III) C-ARES LIBRARY (EXHIBIT C)\r
-IV) cURL (EXHIBIT D)\r
-V) OpenSSL (EXHIBIT E)\r
-VI) Tcl/Tk (EXHIBIT F)\r
-VII) XERCES (EXHIBIT G)\r
-\r
-PRESS ANY ALPHANUMERIC KEY TO CONTINUE TO READ LICENSE AGREEMENT OR PRESS \r
-   '0' to ADVANCE TO END: "
+expect -gl "*'0' to ADVANCE TO END: "
 send -- "0\r"
-expect -exact "0\r
-\r
-\r
-DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): "
+expect -gl "*DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): "
 send -- "y\r"
-expect -exact "y\r
-\r
-\r
-\r
-===============================================================================\r
-Choose Install Directory\r
-------------------------\r
-\r
-Please enter or browse to the same root directory as your past Libero SoC \r
-installations. The installer will create a version-specific subdirectory under\r
-this root driectory. If this is your first Libero SoC installation, please \r
-enter or browse to a root directory under which you intend to install all \r
-future Libero SoC installations.\r
-\r
-Where would you like to install?\r
-\r
-  Default Install Folder: /usr/local/microsemi/Libero_SoC_v12.2\r
-\r
-ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT\r
+expect -gl "*ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT\r
       : "
 send -- "\r"
-expect -exact "\r
-\r
-\r
-\r
-===============================================================================\r
-Choose a Common Directory\r
--------------------------\r
-\r
-Please enter or browse to a directory for installing common files to be shared\r
-across different versions of Libero SoC. If you have previously created such a\r
-directory, please enter its path. If this is your first Libero SoC \r
-installation, please enter or browse to a common directory which you intend to\r
-share with all future Libero SoC installations.\r
-\r
-Common Install Path: (Default: /usr/local/microsemi/common): "
+expect -gl "*Common Install Path: (Default: /usr/local/microsemi/common): "
 send -- "\r"
-expect -exact "\r
-\r
-\r
-\r
-\r
-===============================================================================\r
-Confirm Libero SoC Common Directory\r
------------------------------------\r
-\r
-The Libero SoC common directory that you entered is:\r
-\r
-Type 'back' to go back and modify the directory path, or Enter to continue \r
-\r
-PRESS <ENTER> TO CONTINUE: "
+expect -gl "*PRESS <ENTER> TO CONTINUE: "
 send -- "\r"
-expect -exact "\r
-\r
-\r
-\r
-===============================================================================\r
-Choose Install Set\r
-------------------\r
-\r
-Please choose the Install Set to be installed by this installer.\r
-\r
-  ->1- Libero SoC\r
-\r
-ENTER THE NUMBER FOR THE INSTALL SET, OR PRESS <ENTER> TO ACCEPT THE DEFAULT\r
+expect -gl "*ENTER THE NUMBER FOR THE INSTALL SET, OR PRESS <ENTER> TO ACCEPT THE DEFAULT\r
    : "
 send -- "\r"
-expect -exact "\r
-\r
-\r
-\r
-===============================================================================\r
-Pre-Installation check\r
-\r
-Please Wait\r
------------\r
-\r
-\r
-\r
-===============================================================================\r
-Pre-Installation Summary\r
-------------------------\r
-\r
-Please Review the Following Before Continuing:\r
-\r
-Product Name:\r
-    Libero SoC v12.2\r
-\r
-Install Folder:\r
-    /usr/local/microsemi/Libero_SoC_v12.2\r
-\r
-Link Folder:\r
-    /usr/local/bin\r
-\r
-Product Features:\r
-    Synplify Pro O-2018.09M-SP1-1,\r
-    ModelSim ME 2019.2,\r
-    ModelSim ME Pro 2019.2,\r
-    Identify O-2018.09M-SP1-1,\r
-    Libero SoC v12.2\r
-\r
-Java VM Installation Folder:\r
-    /usr/local/microsemi/Libero_SoC_v12.2/UninstallerData\r
-\r
-Disk Space Information (for Installation Target): \r
-    Required:  33,707,477,020 Bytes\r
-    Available: 58,807,975,936 Bytes\r
-\r
-PRESS <ENTER> TO CONTINUE: "
+expect -gl "*PRESS <ENTER> TO CONTINUE: "
 send -- "\r"
-expect -exact "\r
-\r
-\r
-\r
-===============================================================================\r
-Ready To Install\r
-----------------\r
-\r
-InstallAnywhere is now ready to install Libero SoC v12.2 onto your system at \r
-the following location:\r
-\r
-   /usr/local/microsemi/Libero_SoC_v12.2\r
-\r
-PRESS <ENTER> TO INSTALL: "
+expect -gl "*PRESS <ENTER> TO INSTALL: "
 send -- "\r"
-expect -exact "\r
-\r
-\r
-\r
-===============================================================================\r
-Create Directory\r
-\r
-Please Wait\r
------------\r
-\r
-Executing...\r
-- \r
-\r
-\r
-===============================================================================\r
-Installing...\r
--------------\r
-\r
- \[==================|==================|==================|==================\]\r
- \[------------------|------------------|------------------|------------------\]\r
-\r
-\r
-\r
-===============================================================================\r
-check xdg-desktop-menu\r
-\r
-Please Wait\r
------------\r
-\r
-\r
-\r
-===============================================================================\r
-Post-Installation check\r
-\r
-Please Wait\r
------------\r
-\r
-\r
-\r
-===============================================================================\r
-Installation Complete\r
----------------------\r
-\r
-Congratulations. Libero SoC v12.2 has been successfully installed to:\r
-\r
-   /usr/local/microsemi/Libero_SoC_v12.2\r
-\r
-PRESS <ENTER> TO EXIT THE INSTALLER: "
+expect -gl "*PRESS <ENTER> TO EXIT THE INSTALLER: "
 send -- "\r"
 expect eof

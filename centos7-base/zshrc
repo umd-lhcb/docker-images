@@ -406,36 +406,6 @@ export READNULLCMD=less
 
 #}}}
 
-#{{{ Alias
-
-# Remove output color
-alias -g B='|sed -r "s:\x1B\[[0-9;]*[mK]::g"'
-
-# The last-modified file
-alias -g NM="*(oc[1])"
-
-for i in jpg png gif tiff;  alias -s $i=sxiv
-for i in avi rmvb wmv mp4; alias -s $i=mpv
-for i in mkdir mv cp;  alias $i="nocorrect $i"
-
-alias grep='grep -I --color=auto'
-alias egrep='egrep -I --color=auto'
-alias cal='cal -3'
-alias freeze='kill -STOP'
-alias ls=$'ls -h --color=auto -X --time-style="+\e[33m[\e[32m%Y-%m-%d \e[35m%k:%M\e[33m]\e[m"'
-alias free='free -m'
-alias df='df -hT'
-alias du='du -hs'
-alias ps='ps -Aa'
-alias uuid='ls -al /dev/disk/by-uuid'
-alias extrip="grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'"
-
-# Arch linux
-alias qdtclean='sudo pacman -Rs $(pacman -Qtdq)'
-alias yay='yay --noconfirm'
-
-#}}}
-
 #{{{ Host-specific exports
 
 if [[ -f $HOME/.zshrc.host ]]; then

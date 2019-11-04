@@ -38,3 +38,26 @@ ADD ./actel_setup_vars /usr/local/microsemi/Libero_SoC_v12.2/Libero/bin
 
 # Remove leftover files
 RUN rm -rf /tmp/*
+
+
+###############################
+# Load default configurations #
+###############################
+
+RUN yum install -y zsh && \
+    yum clean all && rm -rf /var/cache/yum
+ADD ./zshrc /home/physicist/.zshrc
+
+
+#############################
+# Bootstrap user permission #
+#############################
+
+# Add the bootstrap script
+ADD ./bootstrap.sh /usr/local/bin
+
+# Make UID and GID ENV
+ENV UID 1000
+ENV GID 985
+
+CMD ["/usr/local/bin/bootstrap.sh"]

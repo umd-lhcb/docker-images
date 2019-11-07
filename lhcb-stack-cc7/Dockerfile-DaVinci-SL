@@ -1,14 +1,12 @@
 # vim:set ft=dockerfile:
 
 ARG DAVINCI_VERSION=v42r8p1
-ARG ANALYSIS_VERSION=v18r8p1
 ARG GCC_DEPENDENCY=x86_64-centos7-gcc62-opt
 
 FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
 
 # Make the ARG values defined in the previous stage accessible
 ARG DAVINCI_VERSION
-ARG ANALYSIS_VERSION
 ARG GCC_DEPENDENCY
 
 ############

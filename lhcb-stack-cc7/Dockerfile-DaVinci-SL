@@ -40,7 +40,7 @@ RUN . /opt/lhcb/LbLogin.sh && \
 RUN . /opt/lhcb/LbLogin.sh && \
     cd DaVinciDev_${DAVINCI_VERSION} && \
     git lb-use TupleToolSemiLeptonic https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
-    git lb-checkout TupleToolSemiLeptonic/0.1.1 Phys/TupleToolSemiLeptonic
+    git lb-checkout TupleToolSemiLeptonic/0.1.2 Phys/TupleToolSemiLeptonic
 
 # Compile TupleToolApplyIsolation & other stuff
 RUN . /opt/lhcb/LbLogin.sh && \

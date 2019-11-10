@@ -41,14 +41,15 @@ RUN pacman -S --noconfirm python python-numpy python-scipy python-pandas python-
 # Install vim plugins #
 #######################
 
-RUN mkdir -p /home/physicist/.config && \
-    mkdir -p /home/physicist/.tmp/vim && \
-    cd /home/physicist/.config && \
-    git clone https://github.com/ypsun-umd/neovim-config-standalone.git nvim && \
-    cd nvim && \
+WORKDIR /tmp
+
+RUN git clone --depth 1 --branch master https://github.com/ypsun-umd/neovim-config-standalone.git && \
+    cd neovim-config-standalone && \
     git submodule update --init --recursive && \
-    # We remove all .git repo to save time when chown
-    find . -name '.git' | xargs rm -rf
+    find . -name '.git' | xargs rm -rf && \
+    # Copy plugin files
+    ./install.sh /usr/share/nvim/runtime && \
+    rm -rf /tmp/*
 
 
 ##############

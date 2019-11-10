@@ -7,18 +7,37 @@ FROM umdlhcb/centos7-base
 # Install neovim #
 ##################
 
+WORKDIR /tmp
+
 RUN yum install -y \
-    https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum install -y \
-    neovim python3-neovim \
+    libtool gettext xsel \
     && yum clean all && rm -rf /var/cache/yum
 
+RUN git clone --depth 1 --branch v0.4.3 https://github.com/neovim/neovim.git
+RUN cd neovim && \
+    make CMAKE_BUILD_TYPE=Release && \
+    make install && \
+    rm -rf /tmp/*
 
-###############
-# Install YCM #
-###############
+# Install neovim python 3 lib
+RUN pip3 install pynvim==0.3.2
 
 
 #######################
 # Install vim plugins #
 #######################
+
+WORKDIR /tmp
+
+RUN git clone --depth 1 --branch master https://github.com/ypsun-umd/neovim-config-standalone.git && \
+    cd neovim-config-standalone && \
+    git submodule update --init --recursive && \
+    find . -name '.git' | xargs rm -rf && \
+    # Copy plugin files
+    ./install.sh /usr/local/share/nvim/runtime && \
+    rm -rf /tmp/*
+
+
+###############
+# Install YCM #
+###############

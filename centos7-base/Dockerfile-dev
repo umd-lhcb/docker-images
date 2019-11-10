@@ -29,13 +29,15 @@ RUN pip3 install pynvim==0.3.2
 
 WORKDIR /tmp
 
-RUN git clone --depth 1 --branch master https://github.com/ypsun-umd/neovim-config-standalone.git && \
+RUN git clone --depth 1 --branch 0.1.2 https://github.com/ypsun-umd/neovim-config-standalone.git && \
     cd neovim-config-standalone && \
     git submodule update --init --recursive && \
     find . -name '.git' | xargs rm -rf && \
     # Copy plugin files
     ./install.sh /usr/local/share/nvim/runtime && \
     rm -rf /tmp/*
+
+RUN ln -s /usr/local/bin/nvim /usr/local/bin/vi
 
 
 ###############

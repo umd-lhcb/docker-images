@@ -1,0 +1,24 @@
+# vim:set ft=dockerfile:
+
+FROM umdlhcb/centos7-base
+
+
+##################
+# Install neovim #
+##################
+
+RUN yum install -y \
+    https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum install -y \
+    neovim python3-neovim \
+    && yum clean all && rm -rf /var/cache/yum
+
+
+###############
+# Install YCM #
+###############
+
+
+#######################
+# Install vim plugins #
+#######################

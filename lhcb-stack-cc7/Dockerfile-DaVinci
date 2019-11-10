@@ -1,9 +1,9 @@
 # vim:set ft=dockerfile:
 
-ARG DAVINCI_VERSION=v44r10p2
-ARG GCC_DEPENDENCY=x86_64_centos7_gcc62_opt
+ARG DAVINCI_VERSION=v45r3
+ARG GCC_DEPENDENCY=x86_64_centos7_gcc8_opt
 
-FROM umdlhcb/centos7-base:latest
+FROM umdlhcb/centos7-base:dev
 
 ARG DAVINCI_VERSION
 ARG GCC_DEPENDENCY
@@ -13,7 +13,7 @@ RUN mkdir -p /tmp/lbinstall-tmp && \
     mkdir -p /tmp/lbinstall-cache
 RUN . /opt/lhcb/LbLogin.sh && \
     lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
-        install DAVINCI_${DAVINCI_VERSION}_${GCC_DEPENDENCY}
-
-# Cleanups
-RUN rm -rf /tmp/*
+        install DAVINCI_${DAVINCI_VERSION}_${GCC_DEPENDENCY} && \
+    # Cleanups
+    rm -rf /tmp/* && \
+    rm /anaconda-post.log

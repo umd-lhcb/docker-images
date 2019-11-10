@@ -408,45 +408,6 @@ export PYTHONPATH=/usr/lib/root
 
 #}}}
 
-#{{{ Alias
-
-# Remove output color
-alias -g B='|sed -r "s:\x1B\[[0-9;]*[mK]::g"'
-
-# The last-modified file
-alias -g NM="*(oc[1])"
-
-# Date for US and CN
-alias adate='for i in US/{Eastern,Central,Pacific} Australia/{Brisbane,Sydney} Asia/{Hong_Kong,Singapore} Europe/{London,Paris,Berlin}; do printf %-22s "$i:";TZ=$i date +"%m-%d %a %H:%M";done'
-
-# Monitor CPU speed in real time
-alias cpufreq-mon='watch grep \"cpu MHz\" /proc/cpuinfo'
-
-for i in jpg png gif tiff;  alias -s $i=sxiv
-for i in avi rmvb wmv mp4; alias -s $i=mpv
-for i in mkdir mv cp;  alias $i="nocorrect $i"
-
-alias grep='grep -I --color=auto'
-alias egrep='egrep -I --color=auto'
-alias cal='cal -3'
-alias freeze='kill -STOP'
-alias ls=$'ls -h --color=auto -X --time-style="+\e[33m[\e[32m%Y-%m-%d \e[35m%k:%M\e[33m]\e[m"'
-alias free='free -m'
-alias df='df -hT'
-alias dog='dig archlinux.org | grep "Query time"'
-alias du='du -hs'
-alias ps='ps -Aa'
-alias uuid='ls -al /dev/disk/by-uuid'
-alias xp='xprop|grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
-alias xe="xev|grep -A2 --line-buffered '^KeyRelease'|sed -n \
-              '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
-alias cr='ctags -R && cscope -b'
-alias sxiv='sxiv -b'
-alias extrip="grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'"
-alias mplayer='mpv'
-
-#}}}
-
 #{{{ Host-specific exports
 
 if [[ -f $HOME/.zshrc.host ]]; then

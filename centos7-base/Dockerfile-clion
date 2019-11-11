@@ -1,0 +1,18 @@
+# vim:set ft=dockerfile:
+
+ARG CLION_VERSION=2019.2.5
+
+FROM umdlhcb/centos7-base:latest
+
+ARG CLION_VERSION
+
+# Install CLion
+WORKDIR /tmp
+
+RUN yum install -y libXtst && \
+    yum clean all && rm -rf /var/cache/yum
+RUN curl https://download-cf.jetbrains.com/cpp/CLion-${CLION_VERSION}.tar.gz --output clion.tar.gz && \
+    tar -xzf clion.tar.gz -C /opt && \
+    rm -rf /tmp/*
+
+ENV PATH="/opt/clion-${CLION_VERSION}/bin:${PATH}"

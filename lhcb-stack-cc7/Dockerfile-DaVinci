@@ -27,10 +27,25 @@ RUN . /opt/lhcb/LbLogin.sh && \
     # Cleanups
     rm -rf /tmp/*
 
+# NOTE: These entries needs to be updated on each DaVinci update
 # Source LHCb environment setter on login
-RUN echo ". /opt/lhcb/LbLogin.sh" >> /home/physicist/.zshrc
+RUN echo ". /opt/lhcb/LbLogin.sh" >> /home/physicist/.zshrc && \
+    echo ". /opt/lhcb/lcg/releases/ROOT/6.18.04-c767d/x86_64-centos7-gcc8-opt/bin/thisroot.sh" >> /home/physicist/.zshrc
 
 # Environmental variables
 ENV CMTCONFIG x86_64-centos7-gcc8-opt
 ENV PATH="/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/bin:${PATH}"
 ENV LD_LIBRARY_PATH="/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/lib64:${LD_LIBRARY_PATH}"
+
+ENV CC="/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/bin/gcc"
+ENV CXX="/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/bin/g++"
+ENV CMAKE_PREFIX_PATH="/opt/lhcb/lcg/releases/Boost/1.70.0-eebf1/x86_64-centos7-gcc8-opt:${CMAKE_PREFIX_PATH}"
+ENV CMAKE_PREFIX_PATH="/opt/lhcb/lcg/releases/HepMC/2.06.10-1a364/x86_64-centos7-gcc8-opt:${CMAKE_PREFIX_PATH}"
+
+# Install CLion
+WORKDIR /tmp
+
+RUN curl https://download-cf.jetbrains.com/cpp/CLion-2019.2.5.tar.gz --output clion.tar.gz && \
+    tar -xzf clion.tar.gz -C /opt && \
+    rm -rf /tmp/*
+RUN yum install -y libXtst

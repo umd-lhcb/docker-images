@@ -15,5 +15,12 @@ RUN . /opt/lhcb/LbLogin.sh && \
     lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
         install DAVINCI_${DAVINCI_VERSION}_${GCC_DEPENDENCY} && \
     # Cleanups
-    rm -rf /tmp/* && \
-    rm /anaconda-post.log
+    rm -rf /tmp/*
+
+# Source LHCb environment setter on login
+RUN echo ". /opt/lhcb/LbLogin.sh" >> /home/physicist/.zshrc
+
+# Environmental variables
+ENV CMTCONFIG x86_64-centos7-gcc8-opt
+ENV PATH="/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/bin:${PATH}"
+ENV LD_LIBRARY_PATH="/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/lib64:${LD_LIBRARY_PATH}"

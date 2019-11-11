@@ -383,8 +383,8 @@ fi
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Environmental variables
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=vi
+export VISUAL=vi
 export SUDO_PROMPT=$'[\e[31;5msudo\e[m] password for \e[33;1m%p\e[m: '
 
 # Colored man pages

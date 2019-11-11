@@ -3,7 +3,7 @@
 ARG DAVINCI_VERSION=v45r3
 ARG GCC_DEPENDENCY=x86_64_centos7_gcc8_opt
 
-FROM umdlhcb/centos7-base:dev
+FROM umdlhcb/centos7-base:clion
 
 ARG DAVINCI_VERSION
 ARG GCC_DEPENDENCY

@@ -19,21 +19,13 @@ RUN yum update -y && \
 RUN yum install -y \
     CERN-CA-certs \
     make gcc gcc-c++ \
-    python3 python3-devel python-devel \
+    python3 python3-devel \
     xz-devel \
     libSM libX11 libXext libXpm libXft libXaw libxslt libjpeg-turbo \
     xorg-x11-xauth xorg-x11-server-Xvfb \
     curl git which \
     zsh tmux tree \
     && yum clean all && rm -rf /var/cache/yum
-
-# Install pip
-WORKDIR /tmp
-
-RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" && \
-    python get-pip.py && \
-    rm /tmp/get-pip.py
-RUN python3 -m pip install --upgrade pip
 
 # Install latest cmake
 RUN pip3 install cmake
@@ -46,7 +38,7 @@ RUN pip3 install cmake
 RUN mkdir -p /opt/lhcb && \
     mkdir -p /tmp/lbinstall-tmp && \
     mkdir -p /tmp/lbinstall-cache
-RUN pip install lbinstall
+RUN pip3 install lbinstall
 RUN lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
         install LBSCRIPTS CMT COMPAT DBASE_LbEnvFix && \
     # Cleanups

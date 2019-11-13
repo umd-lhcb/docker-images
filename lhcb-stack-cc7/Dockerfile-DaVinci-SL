@@ -1,56 +1,51 @@
 # vim:set ft=dockerfile:
 
-ARG DAVINCI_VERSION=v44r10p2
-ARG ANALYSIS_VERSION=v20r9
-ARG GCC_DEPENDENCY=x86_64-centos7-gcc62-opt
+ARG DAVINCI_VERSION=v45r3
+ARG CMTVERSION=x86_64-centos7-gcc8-opt
 
-FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
+FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION} AS builder
 
 # Make the ARG values defined in the previous stage accessible
 ARG DAVINCI_VERSION
-ARG ANALYSIS_VERSION
-ARG GCC_DEPENDENCY
+ARG CMTVERSION
 
 ##################
 # Extend DaVinci #
 ##################
 
-# I know, it's a bad idea to put token inside a docker. But this one is restricted.
-ARG GITLAB_TOKEN=berHk8dhDeVYKCSjhk9x
-
-# Setup ENVs
-ENV PATH="/opt/lhcb/lcg/releases/gcc/6.2.0/x86_64-centos7/bin:${PATH}"
-ENV LD_LIBRARY_PATH="/opt/lhcb/lcg/releases/gcc/6.2.0/x86_64-centos7/lib64:${LD_LIBRARY_PATH}"
+# FIXME: Workaround missing cmake config
+ADD ./toolchain.cmake /opt/lhcb/lhcb/DAVINCI/DAVINCI_${DAVINCI_VERSION}
 
 RUN mkdir -p /build
 WORKDIR /build
 
-RUN . /opt/lhcb/LbLogin.sh && \
+# Check out TupleToolSemiLeptonic
+RUN . /usr/local/bin/envset.sh && \
     git config --global user.name "Physicist" && \
     git config --global user.email "lhcb@physics.umd.edu" && \
-    lb-dev DaVinci/${DAVINCI_VERSION} && cd DaVinciDev_${DAVINCI_VERSION} && \
-    git lb-use Analysis && \
-    git lb-use SemileptonicCommonTools https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-slb/SemileptonicCommonTools.git && \
-    git lb-checkout Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTuple && \
-    git lb-checkout SemileptonicCommonTools/master Phys/SemileptonicCommonTools
+    lb-dev DaVinci/${DAVINCI_VERSION} && \
+    cd DaVinciDev_${DAVINCI_VERSION} && \
+    git lb-use TupleToolSemiLeptonic https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
+    git lb-checkout TupleToolSemiLeptonic/0.2 Phys/TupleToolSemiLeptonic
 
-# Clone TupleToolSemiLeptonic
-RUN git clone https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
-    cp TupleToolSemiLeptonic/*.{cpp,h} /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple/src && \
-    cp TupleToolSemiLeptonic/CMakeLists.txt /build/DaVinciDev_${DAVINCI_VERSION}/Phys/DecayTreeTuple
-
-# Compile TupleToolApplyIsolation & other stuff
-RUN . /opt/lhcb/LbLogin.sh && \
+# Compile TupleToolApplyIsolation
+RUN . /usr/local/bin/envset.sh && \
     cd DaVinciDev_${DAVINCI_VERSION} && \
     make configure && make
 
-# Cleanups
-RUN rm -rf /build/TupleToolSemiLeptonic
+# Remove unneeded generated files
+RUN cd DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION} && \
+    rm -f apply-formatting compile_commands.json
 
 
-########################
-# Update ENV variables #
-########################
+FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
 
-# Update $PATH in zsh
-RUN echo "export PATH=/build/DaVinciDev_${DAVINCI_VERSION}/build.${GCC_DEPENDENCY}:\$PATH" >> /home/physicist/.zshrc
+ARG DAVINCI_VERSION
+ARG CMTVERSION
+
+RUN mkdir -p /build/DaVinciDev_${DAVINCI_VERSION}
+# Copy the build DaVinci to current container
+COPY --from=builder /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION} /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION}
+
+# Update PATH in .zshrc
+RUN echo "export PATH=/build/DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION}:\${PATH}" >> /home/physicist/.zshrc

@@ -17,15 +17,21 @@ RUN . /opt/lhcb/LbLogin.sh && \
     # Cleanups
     rm -rf /tmp/*
 
-# Install additional DaVinci dependency
-# FIXME: This is a bug and should be reported upstream
+# Install bzip2, which is used for DDDB update
+RUN yum install -y bzip2 \
+    && yum clean all && rm -rf /var/cache/yum
+
+# Install missing DaVinci dependencies
 RUN mkdir -p /tmp/lbinstall-tmp && \
     mkdir -p /tmp/lbinstall-cache
 RUN . /opt/lhcb/LbLogin.sh && \
     lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
-        install LCG_96b_six_1.12.0_${GCC_DEPENDENCY} && \
+        install LCG_96b_six_1.12.0_${GCC_DEPENDENCY} DBASE_Det_SQLDDDB_v7r12 && \
     # Cleanups
     rm -rf /tmp/*
+
+# FIXME: Workaround missing cmake config
+ADD ./toolchain.cmake /opt/lhcb/lhcb/DAVINCI/DAVINCI_${DAVINCI_VERSION}
 
 # NOTE: These entries needs to be updated on each DaVinci update
 ADD ./envset.sh /usr/local/bin

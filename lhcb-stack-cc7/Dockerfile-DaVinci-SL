@@ -3,18 +3,15 @@
 ARG DAVINCI_VERSION=v45r3
 ARG CMTVERSION=x86_64-centos7-gcc8-opt
 
+###############
+# Build stage #
+###############
+
 FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION} AS builder
 
 # Make the ARG values defined in the previous stage accessible
 ARG DAVINCI_VERSION
 ARG CMTVERSION
-
-##################
-# Extend DaVinci #
-##################
-
-# FIXME: Workaround missing cmake config
-ADD ./toolchain.cmake /opt/lhcb/lhcb/DAVINCI/DAVINCI_${DAVINCI_VERSION}
 
 RUN mkdir -p /build
 WORKDIR /build
@@ -37,6 +34,10 @@ RUN . /usr/local/bin/envset.sh && \
 RUN cd DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION} && \
     rm -f apply-formatting compile_commands.json
 
+
+##############
+# Pack stage #
+##############
 
 FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
 

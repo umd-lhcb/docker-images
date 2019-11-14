@@ -20,14 +20,13 @@ RUN . /opt/lhcb/LbLogin.sh && \
 # Install various DB data
 RUN mkdir -p /opt/lhcb/lhcb/git-conddb
 RUN cd /opt/lhcb/lhcb/git-conddb && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/STCOND.git STCOND.git && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/VELOCOND.git VELOCOND.git && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/ONLINE.git ONLINE.git && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/DQFLAGS.git DQFLAGS.git && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/SIMCOND.git SIMCOND.git && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/LHCBCOND.git LHCBCOND.git && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/DDDB.git DDDB.git
-ENV GITCONDDBPATH "/opt/lhcb/lhcb/git-conddb"
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/STCOND.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/VELOCOND.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/ONLINE.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/DQFLAGS.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/SIMCOND.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/LHCBCOND.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/DDDB.git
 
 # FIXME: Install missing DaVinci dependencies
 RUN mkdir -p /tmp/lbinstall-tmp && \

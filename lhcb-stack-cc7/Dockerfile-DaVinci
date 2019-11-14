@@ -26,9 +26,22 @@ RUN mkdir -p /tmp/lbinstall-tmp && \
     mkdir -p /tmp/lbinstall-cache
 RUN . /opt/lhcb/LbLogin.sh && \
     lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
-        install LCG_96b_six_1.12.0_${GCC_DEPENDENCY} DBASE_Det_SQLDDDB_v7r12 && \
+        install LCG_96b_six_1.12.0_${GCC_DEPENDENCY} && \
     # Cleanups
     rm -rf /tmp/*
+
+# Install CondDB
+# FIXME: Bad practice to embed token
+ARG GITLAB_TOKEN=berHk8dhDeVYKCSjhk9x
+RUN cd /opt/lhcb/lhcb && \
+    git clone --depth 1 https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-conddb/STCOND.git && \
+    git clone --depth 1 https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-conddb/VELOCOND.git && \
+    git clone --depth 1 https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-conddb/ONLINE.git && \
+    git clone --depth 1 https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-conddb/DQFLAGS.git && \
+    git clone --depth 1 https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-conddb/SIMCOND.git && \
+    git clone --depth 1 https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-conddb/LHCBCOND.git && \
+    git clone --depth 1 https://oauth2:${GITLAB_TOKEN}@gitlab.cern.ch/lhcb-conddb/DDDB.git
+ENV GITCONDDBPATH "/opt/lhcb/lhcb"
 
 # FIXME: Workaround missing cmake config
 ADD ./toolchain.cmake /opt/lhcb/lhcb/DAVINCI/DAVINCI_${DAVINCI_VERSION}

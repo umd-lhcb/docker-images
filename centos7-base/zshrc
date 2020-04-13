@@ -127,7 +127,7 @@ local job="%1(j,$pfg_red:$pfg_blue%j,)$pR"
 local prompt_time="%(?:$pfg_green:$pfg_red)%*$pR"
 typeset -A altchar
 
-PROMPT='$pfg_red%(?..%? )$user$pfg_yellow@$pR$host$(get_prompt_git)$job$symbol'
+PROMPT='$pfg_red%(?..%? )$user$pfg_yellow@$pR$host$job$symbol'
 PROMPT2="$PROMPT$pfg_cyan%_$pR $pB$pfg_black>$pR$pfg_green>$pB$pfg_green>$pR "
 RPROMPT='$__PROMPT_PWD'
 SPROMPT="${pfg_yellow}zsh$pR: correct '$pfg_red$pB%R$pR' to '$pfg_green$pB%r$pR' ? ([${pfg_cyan}Y$pR]es/[${pfg_cyan}N$pR]o/[${pfg_cyan}E$pR]dit/[${pfg_cyan}A$pR]bort) "

@@ -43,6 +43,5 @@ This provides an alternative base image for all `lhcb-stack-cc7` images,
 compared to CERN's offical CERN CentOS 7 docker image. It has all runtime
 dependencies installed. This image should not be used by end user.
 
-In addition, the `dev` tag images have `neovim` and `YouCompleteMe` installed;
-these images provide a decent C/C++ develop environment for LHCb-specific
-packages.
+In addition, the `dev` tag images have `clion` installed; these images provide
+a decent C/C++ develop environment for LHCb-specific packages.

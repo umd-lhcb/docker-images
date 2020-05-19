@@ -38,7 +38,7 @@ show-args:
 centos7-base-latest:
 	docker build \
 	    --tag umdlhcb/centos7-base:$(date) \
-	    -f $(makefile_dir)/alpine/Dockerfile $(makefile_dir)
+	    -f $(makefile_dir)/centos7-base/Dockerfile-base $(makefile_dir)/centos7-base
 	docker tag umdlhcb/centos7-base:$(date) umdlhcb/centos7-base:latest
 
 

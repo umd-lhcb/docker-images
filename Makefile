@@ -3,14 +3,8 @@
 #################
 
 CLION_VERSION ?= 2020.1
-
-PANDOC_VERSION ?= edge
-
-ifeq ($(PANDOC_VERSION),edge)
-PANDOC_COMMIT          ?= master
-else
-PANDOC_COMMIT          ?= $(PANDOC_VERSION)
-endif
+DAVINCI_VERSION ?= v45r3
+GCC_DEPENDENCY ?= x86_64_centos7_gcc8_opt
 
 
 ###########
@@ -27,8 +21,9 @@ date := $(shell date "+%Y%m%d")
 # than potentially engaging in expensive builds.
 .PHONY: show-args
 show-args:
-	@printf "PANDOC_VERSION (i.e. image version tag): %s\n" $(PANDOC_VERSION)
-	@printf "pandoc_commit=%s\n" $(PANDOC_COMMIT)
+	@printf "CLION_VERSION: %s\n" $(CLION_VERSION)
+	@printf "DAVINCI_VERSION: %s\n" $(DAVINCI_VERSION)
+	@printf "GCC_DEPENDENCY: %s\n" $(GCC_DEPENDENCY)
 
 
 ################
@@ -49,3 +44,18 @@ centos7-base-clion:
 		--build-arg CLION_VERSION=$(CLION_VERSION) \
 	    -f $(makefile_dir)/centos7-base/Dockerfile-clion $(makefile_dir)/centos7-base
 	docker tag umdlhcb/centos7-base:clion-$(date) umdlhcb/centos7-base:clion
+
+
+##################
+# lhcb-stack-cc7 #
+##################
+
+.PHONY: lhcb-stack-cc7-DaVinci
+
+lhcb-stack-cc7-DaVinci:
+	docker build \
+	    --tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-$(date) \
+		--build-arg DAVINCI_VERSION=$(DAVINCI_VERSION) \
+		--build-arg GCC_DEPENDENCY=$(GCC_DEPENDENCY) \
+	    -f $(makefile_dir)/lhcb-stack-cc7/Dockerfile-DaVinci $(makefile_dir)/lhcb-stack-cc7
+	docker tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-$(date) umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)

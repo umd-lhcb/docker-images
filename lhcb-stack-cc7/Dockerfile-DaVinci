@@ -1,8 +1,5 @@
 # vim:set ft=dockerfile:
 
-ARG DAVINCI_VERSION=v45r3
-ARG GCC_DEPENDENCY=x86_64_centos7_gcc8_opt
-
 FROM umdlhcb/centos7-base:clion
 
 ARG DAVINCI_VERSION
@@ -38,6 +35,7 @@ RUN . /opt/lhcb/LbLogin.sh && \
             LCG_96b_python_dateutil_2.8.0_${GCC_DEPENDENCY} \
             LCG_96b_GitCondDB_0.1.1_${GCC_DEPENDENCY} \
             LCG_96b_PyYAML_5.1_${GCC_DEPENDENCY} \
+            LCG_96b_ipython_5.8.0_${GCC_DEPENDENCY} \
         && \
     # Cleanups
     rm -rf /tmp/*

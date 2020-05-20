@@ -2,6 +2,8 @@
 # Configuration #
 #################
 
+CLION_VERSION ?= 2020.1
+
 PANDOC_VERSION ?= edge
 
 ifeq ($(PANDOC_VERSION),edge)
@@ -41,18 +43,9 @@ centos7-base-latest:
 	    -f $(makefile_dir)/centos7-base/Dockerfile-base $(makefile_dir)/centos7-base
 	docker tag umdlhcb/centos7-base:$(date) umdlhcb/centos7-base:latest
 
-
-################################################################################
-# Alpine images and tests                                                      #
-################################################################################
-.PHONY: alpine alpine-latex test-alpine test-alpine-latex
-alpine:
+centos7-base-clion:
 	docker build \
-	    --tag yipengsun/pandoc-core:$(PANDOC_VERSION) \
-	    --build-arg pandoc_commit=$(PANDOC_COMMIT) \
-	    -f $(makefile_dir)/alpine/Dockerfile $(makefile_dir)
-alpine-latex:
-	docker build \
-	    --tag yipengsun/pandoc-latex:$(PANDOC_VERSION) \
-	    --build-arg base_tag=$(PANDOC_VERSION) \
-	    -f $(makefile_dir)/alpine/latex/Dockerfile $(makefile_dir)
+	    --tag umdlhcb/centos7-base:clion-$(date) \
+		--build-arg CLION_VERSION=$(CLION_VERSION) \
+	    -f $(makefile_dir)/centos7-base/Dockerfile-clion $(makefile_dir)/centos7-base
+	docker tag umdlhcb/centos7-base:clion-$(date) umdlhcb/centos7-base:clion

@@ -1,7 +1,5 @@
 # vim:set ft=dockerfile:
 
-ARG CLION_VERSION=2019.2.5
-
 FROM umdlhcb/centos7-base:latest
 
 ARG CLION_VERSION

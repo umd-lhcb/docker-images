@@ -17,9 +17,10 @@ RUN . /opt/lhcb/LbLogin.sh && \
 # Install various DB data
 RUN mkdir -p /opt/lhcb/lhcb/git-conddb
 RUN cd /opt/lhcb/lhcb/git-conddb && \
+    git config --global http.postBuffer 157286400 && \
     git clone --mirror https://gitlab.cern.ch/lhcb-conddb/STCOND.git && \
     git clone --mirror https://gitlab.cern.ch/lhcb-conddb/VELOCOND.git && \
-    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/ONLINE.git && \
+    git clone --mirror --depth 1 https://gitlab.cern.ch/lhcb-conddb/ONLINE.git && \
     git clone --mirror https://gitlab.cern.ch/lhcb-conddb/DQFLAGS.git && \
     git clone --mirror https://gitlab.cern.ch/lhcb-conddb/SIMCOND.git && \
     git clone --mirror https://gitlab.cern.ch/lhcb-conddb/LHCBCOND.git && \
@@ -34,8 +35,7 @@ RUN . /opt/lhcb/LbLogin.sh && \
             LCG_96b_six_1.12.0_${GCC_DEPENDENCY} \
             LCG_96b_python_dateutil_2.8.0_${GCC_DEPENDENCY} \
             LCG_96b_GitCondDB_0.1.1_${GCC_DEPENDENCY} \
-            LCG_96b_PyYAML_5.1_${GCC_DEPENDENCY} \
-            LCG_96b_ipython_5.8.0_${GCC_DEPENDENCY} \
+            LCG_96b_PyYAML_5.1_${GCC_DEPENDENCY}
         && \
     # Cleanups
     rm -rf /tmp/*

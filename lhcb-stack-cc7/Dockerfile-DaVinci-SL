@@ -1,17 +1,14 @@
 # vim:set ft=dockerfile:
 
-ARG DAVINCI_VERSION=v45r3
-ARG CMTVERSION=x86_64-centos7-gcc8-opt
-
 ###############
 # Build stage #
 ###############
 
 FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION} AS builder
 
-# Make the ARG values defined in the previous stage accessible
 ARG DAVINCI_VERSION
-ARG CMTVERSION
+ARG TUPLETOOL_SL_VERSION
+ARG CMT_VERSION
 
 RUN mkdir -p /build
 WORKDIR /build
@@ -23,7 +20,7 @@ RUN . /usr/local/bin/envset.sh && \
     lb-dev DaVinci/${DAVINCI_VERSION} && \
     cd DaVinciDev_${DAVINCI_VERSION} && \
     git lb-use TupleToolSemiLeptonic https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
-    git lb-checkout TupleToolSemiLeptonic/0.2 Phys/TupleToolSemiLeptonic
+    git lb-checkout TupleToolSemiLeptonic/${TUPLETOOL_SL_VERSION} Phys/TupleToolSemiLeptonic
 
 # Compile TupleToolApplyIsolation
 RUN . /usr/local/bin/envset.sh && \
@@ -31,7 +28,7 @@ RUN . /usr/local/bin/envset.sh && \
     make configure && make
 
 # Remove unneeded generated files
-RUN cd DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION} && \
+RUN cd DaVinciDev_${DAVINCI_VERSION}/build.${CMT_VERSION} && \
     rm -f apply-formatting compile_commands.json
 
 
@@ -42,11 +39,11 @@ RUN cd DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION} && \
 FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION}
 
 ARG DAVINCI_VERSION
-ARG CMTVERSION
+ARG CMT_VERSION
 
 RUN mkdir -p /build/DaVinciDev_${DAVINCI_VERSION}
 # Copy the build DaVinci to current container
-COPY --from=builder /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION} /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION}
+COPY --from=builder /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMT_VERSION} /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMT_VERSION}
 
 # Update PATH in .zshrc
-RUN echo "export PATH=/build/DaVinciDev_${DAVINCI_VERSION}/build.${CMTVERSION}:\${PATH}" >> /home/physicist/.zshrc
+RUN echo "export PATH=/build/DaVinciDev_${DAVINCI_VERSION}/build.${CMT_VERSION}:\${PATH}" >> /home/physicist/.zshrc

@@ -5,6 +5,10 @@
 CLION_VERSION ?= 2020.1
 DAVINCI_VERSION ?= v45r3
 GCC_DEPENDENCY ?= x86_64_centos7_gcc8_opt
+TUPLETOOL_SL_VERSION ?= 0.2.1
+
+CMT_VERSION_TMP := $(subst _,-,$(GCC_DEPENDENCY))
+CMT_VERSION := $(subst x86-64,x86_64,$(CMT_VERSION_TMP))
 
 
 ###########
@@ -24,6 +28,8 @@ show-args:
 	@printf "CLION_VERSION: %s\n" $(CLION_VERSION)
 	@printf "DAVINCI_VERSION: %s\n" $(DAVINCI_VERSION)
 	@printf "GCC_DEPENDENCY: %s\n" $(GCC_DEPENDENCY)
+	@printf "TUPLETOOL_SL_VERSION: %s\n" $(TUPLETOOL_SL_VERSION)
+	@printf "CMT_VERSION: %s\n" $(CMT_VERSION)
 
 
 ################
@@ -50,7 +56,7 @@ centos7-base-clion:
 # lhcb-stack-cc7 #
 ##################
 
-.PHONY: lhcb-stack-cc7-DaVinci
+.PHONY: lhcb-stack-cc7-DaVinci lhcb-stack-cc7-DaVinci-SL
 
 lhcb-stack-cc7-DaVinci:
 	docker build \
@@ -59,3 +65,12 @@ lhcb-stack-cc7-DaVinci:
 		--build-arg GCC_DEPENDENCY=$(GCC_DEPENDENCY) \
 	    -f $(makefile_dir)/lhcb-stack-cc7/Dockerfile-DaVinci $(makefile_dir)/lhcb-stack-cc7
 	docker tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-$(date) umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)
+
+lhcb-stack-cc7-DaVinci-SL:
+	docker build \
+	    --tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-SL-$(date) \
+		--build-arg DAVINCI_VERSION=$(DAVINCI_VERSION) \
+		--build-arg TUPLETOOL_SL_VERSION=$(TUPLETOOL_SL_VERSION) \
+		--build-arg CMT_VERSION=$(CMT_VERSION) \
+	    -f $(makefile_dir)/lhcb-stack-cc7/Dockerfile-DaVinci-SL $(makefile_dir)/lhcb-stack-cc7
+	docker tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-SL-$(date) umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-SL

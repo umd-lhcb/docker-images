@@ -1,5 +1,7 @@
 # vim:set ft=dockerfile:
 
+ARG DAVINCI_VERSION
+
 ###############
 # Build stage #
 ###############

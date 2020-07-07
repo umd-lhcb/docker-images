@@ -126,7 +126,7 @@ local job="%1(j,$pfg_red:$pfg_blue%j,)$pR"
 local prompt_time="%(?:$pfg_green:$pfg_red)%*$pR"
 typeset -A altchar
 
-PROMPT='$pfg_red%(?..%? )$user$pfg_yellow@$pR$host$(get_prompt_git)$job$symbol'
+PROMPT='$pfg_red%(?..%? )$user$pfg_yellow@$pR$host$job$symbol'
 PROMPT2="$PROMPT$pfg_cyan%_$pR $pB$pfg_black>$pR$pfg_green>$pB$pfg_green>$pR "
 RPROMPT='$__PROMPT_PWD'
 SPROMPT="${pfg_yellow}zsh$pR: correct '$pfg_red$pB%R$pR' to '$pfg_green$pB%r$pR' ? ([${pfg_cyan}Y$pR]es/[${pfg_cyan}N$pR]o/[${pfg_cyan}E$pR]dit/[${pfg_cyan}A$pR]bort) "
@@ -158,61 +158,6 @@ bin-exist() {[[ -n ${commands[$1]} ]]}
 __PROMPT_PWD="$pfg_blue%~$pR"
 pwd_color_chpwd() { [ $PWD = $OLDPWD ] || __PROMPT_PWD="$pU$pfg_cyan%~$pR" }
 pwd_color_preexec() { __PROMPT_PWD="$pfg_blue%~$pR" }
-
-# Functions to display git branch in prompt
-get_git_status() {
-    unset __CURRENT_GIT_BRANCH
-    unset __CURRENT_GIT_BRANCH_STATUS
-    unset __CURRENT_GIT_BRANCH_IS_DIRTY
-
-    [[ "$PWD" = "$HOME" ]]  &&  return
-    local dir=$(git rev-parse --git-dir 2>/dev/null)
-    [[ "${dir:h}" = "$HOME" ]] && return
-
-    local st="$(git status 2>/dev/null)"
-    if [[ -n "$st" ]]; then
-        local -a arr
-        arr=(${(f)st})
-
-        if [[ $arr[1] =~ 'Not currently on any branch.' ]]; then
-            __CURRENT_GIT_BRANCH='no-branch'
-        else
-            __CURRENT_GIT_BRANCH="${arr[1][(w)4]}";
-        fi
-
-        if [[ $arr[2] =~ 'Your branch is' ]]; then
-            if [[ $arr[2] =~ 'ahead' ]]; then
-                __CURRENT_GIT_BRANCH_STATUS='ahead'
-            elif [[ $arr[2] =~ 'diverged' ]]; then
-                __CURRENT_GIT_BRANCH_STATUS='diverged'
-            elif [[ $arr[2] =~ 'behind' ]]; then
-                __CURRENT_GIT_BRANCH_STATUS='behind'
-            else
-                __CURRENT_GIT_BRANCH_STATUS='up-to-date'
-            fi
-        fi
-
-        [[ ! $st =~ "nothing to commit" ]] && __CURRENT_GIT_BRANCH_IS_DIRTY='1'
-    fi
-}
-
-git_branch_precmd() { [[ "$(fc -l -1)" == *git* ]] && get_git_status }
-
-git_branch_chpwd() { get_git_status }
-
-# This one is to be used in prompt
-get_prompt_git() {
-    if [[ -n $__CURRENT_GIT_BRANCH ]]; then
-        local s=$__CURRENT_GIT_BRANCH
-        case "$__CURRENT_GIT_BRANCH_STATUS" in
-            ahead)    s+="+" ;;
-            diverged) s+="=" ;;
-            behind)   s+="-" ;;
-        esac
-        [[ $__CURRENT_GIT_BRANCH_IS_DIRTY = '1' ]] && s+="*"
-        echo "$pfg_yellow:$pfg_white$pbg_black$pB $s $pR"
-    fi
-}
 
 # Functions to set dynamic title
 title_precmd() {

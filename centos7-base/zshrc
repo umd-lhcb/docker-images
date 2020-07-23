@@ -191,11 +191,9 @@ esac
 # Set functions accordingly
 typeset -ga preexec_functions precmd_functions chpwd_functions
 precmd_functions+=title_precmd
-precmd_functions+=git_branch_precmd
 preexec_functions+=title_preexec
 preexec_functions+=pwd_color_preexec
 chpwd_functions+=pwd_color_chpwd
-chpwd_functions+=git_branch_chpwd
 
 # Colorize command as blue if found in path or defined.
 TOKENS_FOLLOWED_BY_COMMANDS=('|' '||' ';' '&' '&&' 'sudo' 'do' 'time' 'strace')

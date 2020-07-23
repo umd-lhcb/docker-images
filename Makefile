@@ -3,8 +3,8 @@
 #################
 
 CLION_VERSION ?= 2020.1
-DAVINCI_VERSION ?= v45r3
-GCC_DEPENDENCY ?= x86_64_centos7_gcc8_opt
+DAVINCI_VERSION ?= v45r4
+GCC_DEPENDENCY ?= x86_64_centos7_gcc9_opt
 TUPLETOOL_SL_VERSION ?= 0.2.1
 
 CMT_VERSION_TMP := $(subst _,-,$(GCC_DEPENDENCY))

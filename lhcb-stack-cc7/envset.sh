@@ -1,9 +1,9 @@
 #!/bin/sh
 
 OS=x86_64-centos7
-PLATFORM=${OS}-gcc8-opt
+PLATFORM=${OS}-gcc9-opt
 
-export CMTCONFIG=x86_64-centos7-gcc8-opt
+export CMTCONFIG=x86_64-centos7-gcc9-opt
 
 . /opt/lhcb/LbLogin.sh
 . /opt/lhcb/lcg/releases/ROOT/6.18.04-c767d/${PLATFORM}/bin/thisroot.sh

@@ -1,6 +1,6 @@
 # docker-images
-Custom dockers images for UMD LHCb group analyses.
-
+Custom dockers images for UMD LHCb group analyses. See rules defined in the
+`Makefile` for build instructions of these docker images.
 
 ## `hep_ml`
 
@@ -17,6 +17,3 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 ```
 docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/lhcb-stack-cc7:<tag>
 ```
-
-### Build instruction for `Dockerfile-DaVinci`
-See rules defined in the `Makefile`.

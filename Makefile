@@ -63,6 +63,7 @@ lhcb-stack-cc7-DaVinci:
 	    --tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-$(date) \
 		--build-arg DAVINCI_VERSION=$(DAVINCI_VERSION) \
 		--build-arg GCC_DEPENDENCY=$(GCC_DEPENDENCY) \
+		--build-arg CMT_VERSION=$(CMT_VERSION) \
 	    -f $(makefile_dir)/lhcb-stack-cc7/Dockerfile-DaVinci $(makefile_dir)/lhcb-stack-cc7
 	docker tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-$(date) umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)
 

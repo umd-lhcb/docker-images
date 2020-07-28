@@ -17,3 +17,6 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 ```
 docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthority -e DISPLAY -e UID=$(id -u) -e GID=$(id -g) --net=host umdlhcb/lhcb-stack-cc7:<tag>
 ```
+
+**Note**: For `DaVinci/v45r4` and newer, there's a lot more error messages when
+ntupling. The culprit is [this commit](https://gitlab.cern.ch/rcurrie/LHCb/commit/3ed724bd667d2626f35b7b710864c8fe0131dbb1). This is harmless.

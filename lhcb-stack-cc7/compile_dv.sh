@@ -4,7 +4,6 @@ DAVINCI_VERSION=v45r4
 TUPLETOOL_SL_VERSION=0.2.1
 
 # Check out TupleToolSemiLeptonic
-. /usr/local/bin/envset.sh
 git config --global user.name "Physicist"
 git config --global user.email "lhcb@physics.umd.edu"
 

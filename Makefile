@@ -2,7 +2,7 @@
 # Configuration #
 #################
 
-CLION_VERSION ?= 2020.1
+CLION_VERSION ?= 2020.3
 DAVINCI_VERSION ?= v45r4
 GCC_DEPENDENCY ?= x86_64_centos7_gcc9_opt
 TUPLETOOL_SL_VERSION ?= 0.2.1

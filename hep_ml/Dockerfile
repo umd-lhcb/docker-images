@@ -37,21 +37,6 @@ RUN pacman -S --noconfirm python python-numpy python-scipy python-pandas python-
         neovim xclip python-neovim python-jedi
 
 
-#######################
-# Install vim plugins #
-#######################
-
-WORKDIR /tmp
-
-RUN git clone --depth 1 --branch master https://github.com/ypsun-umd/neovim-config-standalone.git && \
-    cd neovim-config-standalone && \
-    git submodule update --init --recursive && \
-    find . -name '.git' | xargs rm -rf && \
-    # Copy plugin files
-    ./install.sh /usr/share/nvim/runtime && \
-    rm -rf /tmp/*
-
-
 ##############
 # AUR helper #
 ##############

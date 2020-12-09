@@ -20,3 +20,17 @@ docker run --rm -it -v <src_path>:/data -v $XAUTHORITY:/home/physicist/.Xauthori
 
 **Note**: For `DaVinci/v45r4` and newer, there's a lot more error messages when
 ntupling. The culprit is [this commit](https://gitlab.cern.ch/rcurrie/LHCb/commit/3ed724bd667d2626f35b7b710864c8fe0131dbb1). This is harmless.
+
+
+## Tips for LHCb software version discovery
+Most of LHCb software version can be discovered on `lxplus` with:
+```
+lb-run -l <software_name>
+```
+
+For example, `<software_name>` can be `DaVinci`.
+
+To list LHCb software that can be `lbinstall`-ed:
+```
+lbinstall query > src/lbinstall_available_packages.txt --root=$HOME/build/lbinstall
+```

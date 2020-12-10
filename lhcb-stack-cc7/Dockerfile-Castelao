@@ -1,0 +1,55 @@
+# vim:set ft=dockerfile:
+
+FROM umdlhcb/centos7-base:clion
+
+ARG CASTELAO_VERSION
+ARG GCC_DEPENDENCY
+ARG CMT_VERSION
+
+# Install DaVinci
+RUN mkdir -p /tmp/lbinstall-tmp && \
+    mkdir -p /tmp/lbinstall-cache
+RUN . /opt/lhcb/LbLogin.sh && \
+    lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
+        install CASTELAO_${CASTELAO_VERSION}_${GCC_DEPENDENCY} && \
+    # Cleanups
+    rm -rf /tmp/*
+
+# Install various DB data
+RUN mkdir -p /opt/lhcb/lhcb/git-conddb
+RUN cd /opt/lhcb/lhcb/git-conddb && \
+    git config --global http.postBuffer 157286400 && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/STCOND.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/VELOCOND.git && \
+    git clone --mirror --depth 1 https://gitlab.cern.ch/lhcb-conddb/ONLINE.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/DQFLAGS.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/SIMCOND.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/LHCBCOND.git && \
+    git clone --mirror https://gitlab.cern.ch/lhcb-conddb/DDDB.git
+
+## FIXME: Install missing DaVinci dependencies
+#RUN mkdir -p /tmp/lbinstall-tmp && \
+#    mkdir -p /tmp/lbinstall-cache
+#RUN . /opt/lhcb/LbLogin.sh && \
+#    lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
+#        install \
+#            LCG_96b_six_1.12.0_${GCC_DEPENDENCY} \
+#            LCG_96b_python_dateutil_2.8.0_${GCC_DEPENDENCY} \
+#            LCG_96b_GitCondDB_0.1.1_${GCC_DEPENDENCY} \
+#            LCG_96b_PyYAML_5.1_${GCC_DEPENDENCY} \
+#        && \
+#    # Cleanups
+#    rm -rf /tmp/*
+#
+## FIXME: Workaround missing cmake config
+#ADD ./toolchain.cmake /opt/lhcb/lhcb/DAVINCI/DAVINCI_${DAVINCI_VERSION}
+
+# NOTE: These entries needs to be updated on each DaVinci update
+RUN echo "export CMTCONFIG=${CMT_VERSION}" >> /usr/local/bin/envset.sh && \
+    echo ". /opt/lhcb/LbLogin.sh" >> /usr/local/bin/envset.sh && \
+    echo ". /opt/lhcb/lcg/releases/ROOT/6.18.04-c767d/${CMT_VERSION}/bin/thisroot.sh" >> /usr/local/bin/envset.sh && \
+    echo "export LD_LIBRARY_PATH=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/lib64:\${LD_LIBRARY_PATH}" >> /usr/local/bin/envset.sh && \
+    echo "export CC=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/bin/gcc" >> /usr/local/bin/envset.sh && \
+    echo "export CXX=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/bin/g++" >> /usr/local/bin/envset.sh
+
+RUN echo ". /usr/local/bin/envset.sh" >> /home/physicist/.zshrc

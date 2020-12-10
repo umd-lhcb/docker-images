@@ -4,6 +4,7 @@
 
 CLION_VERSION ?= 2020.3
 DAVINCI_VERSION ?= v45r4
+CASTELAO_VERSION ?= v10r0
 GCC_DEPENDENCY ?= x86_64_centos7_gcc9_opt
 TUPLETOOL_SL_VERSION ?= 0.2.1
 
@@ -56,7 +57,7 @@ centos7-base-clion:
 # lhcb-stack-cc7 #
 ##################
 
-.PHONY: lhcb-stack-cc7-DaVinci lhcb-stack-cc7-DaVinci-SL
+.PHONY: lhcb-stack-cc7-DaVinci lhcb-stack-cc7-DaVinci-SL lhcb-stack-cc7-Castelao
 
 lhcb-stack-cc7-DaVinci:
 	docker build \
@@ -75,3 +76,12 @@ lhcb-stack-cc7-DaVinci-SL:
 		--build-arg CMT_VERSION=$(CMT_VERSION) \
 	    -f $(makefile_dir)/lhcb-stack-cc7/Dockerfile-DaVinci-SL $(makefile_dir)/lhcb-stack-cc7
 	docker tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-SL-$(date) umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-SL
+
+lhcb-stack-cc7-Castelao:
+	docker build \
+	    --tag umdlhcb/lhcb-stack-cc7:Castelao-$(CASTELAO_VERSION)-$(date) \
+		--build-arg CASTELAO_VERSION=$(CASTELAO_VERSION) \
+		--build-arg GCC_DEPENDENCY=$(GCC_DEPENDENCY) \
+		--build-arg CMT_VERSION=$(CMT_VERSION) \
+	    -f $(makefile_dir)/lhcb-stack-cc7/Dockerfile-Castelao $(makefile_dir)/lhcb-stack-cc7
+	docker tag umdlhcb/lhcb-stack-cc7:Castelao-$(CASTELAO_VERSION)-$(date) umdlhcb/lhcb-stack-cc7:Castelao-$(CASTELAO_VERSION)

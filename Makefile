@@ -3,10 +3,15 @@
 #################
 
 CLION_VERSION ?= 2020.3
+
 DAVINCI_VERSION ?= v45r4
-CASTELAO_VERSION ?= v10r0
-GCC_DEPENDENCY ?= x86_64_centos7_gcc9_opt
 TUPLETOOL_SL_VERSION ?= 0.2.1
+GCC_DEPENDENCY ?= x86_64_centos7_gcc9_opt
+
+# v3r6 can't be downloaded
+CASTELAO_VERSION ?= v3r4
+# For run 2, Castelao was built on gcc8
+# GCC_DEPENDENCY ?= x86_64_centos7_gcc8_opt
 
 CMT_VERSION_TMP := $(subst _,-,$(GCC_DEPENDENCY))
 CMT_VERSION := $(subst x86-64,x86_64,$(CMT_VERSION_TMP))

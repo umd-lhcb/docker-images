@@ -48,8 +48,8 @@ RUN . /opt/lhcb/LbLogin.sh && \
 RUN echo "export CMTCONFIG=${CMT_VERSION}" >> /usr/local/bin/envset.sh && \
     echo ". /opt/lhcb/LbLogin.sh" >> /usr/local/bin/envset.sh && \
     echo ". /opt/lhcb/lcg/releases/ROOT/6.18.04-c767d/${CMT_VERSION}/bin/thisroot.sh" >> /usr/local/bin/envset.sh && \
-    echo "export LD_LIBRARY_PATH=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/lib64:\${LD_LIBRARY_PATH}" >> /usr/local/bin/envset.sh && \
-    echo "export CC=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/bin/gcc" >> /usr/local/bin/envset.sh && \
-    echo "export CXX=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/bin/g++" >> /usr/local/bin/envset.sh
+    echo "export LD_LIBRARY_PATH=/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/lib64:\${LD_LIBRARY_PATH}" >> /usr/local/bin/envset.sh && \
+    echo "export CC=/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/bin/gcc" >> /usr/local/bin/envset.sh && \
+    echo "export CXX=/opt/lhcb/lcg/releases/gcc/8.3.0/x86_64-centos7/bin/g++" >> /usr/local/bin/envset.sh
 
 RUN echo ". /usr/local/bin/envset.sh" >> /home/physicist/.zshrc

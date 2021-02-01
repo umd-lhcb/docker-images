@@ -42,7 +42,7 @@ RUN . /opt/lhcb/LbLogin.sh && \
     rm -rf /tmp/*
 
 # FIXME: Workaround missing cmake config
-#ADD ./toolchain.cmake /opt/lhcb/lhcb/DAVINCI/DAVINCI_${DAVINCI_VERSION}
+ADD ./toolchain.cmake /opt/lhcb/lhcb/CASTELAO/CASTELAO_${CASTELAO_VERSION}
 
 # NOTE: These entries needs to be updated on each DaVinci update
 RUN echo "export CMTCONFIG=${CMT_VERSION}" >> /usr/local/bin/envset.sh && \

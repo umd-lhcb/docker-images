@@ -54,6 +54,8 @@ RUN echo "export CMTCONFIG=${CMT_VERSION}" >> /usr/local/bin/envset.sh && \
     echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/HepMC/2.06.10-1a364/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh && \
     echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/GSL/2.5-32fc5/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh && \
     echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/Boost/1.70.0-eebf1/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh && \
+    echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/blas/0.3.5.openblas-bb5ea/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh && \
+    echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/Davix/0.7.3-d94fa/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh && \
     echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/vdt/0.4.3-992df/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh
 
 RUN echo ". /usr/local/bin/envset.sh" >> /home/physicist/.zshrc

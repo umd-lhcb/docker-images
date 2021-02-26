@@ -33,10 +33,8 @@ RUN mkdir -p /tmp/lbinstall-tmp && \
 RUN . /opt/lhcb/LbLogin.sh && \
     lbinstall --root=/opt/lhcb --tmp_dir=/tmp/lbinstall-tmp --rpmcache=/tmp/lbinstall-cache \
         install \
-            LCG_96b_six_1.12.0_${GCC_DEPENDENCY} \
-            LCG_96b_python_dateutil_2.8.0_${GCC_DEPENDENCY} \
-            LCG_96b_GitCondDB_0.1.1_${GCC_DEPENDENCY} \
-            LCG_96b_PyYAML_5.1_${GCC_DEPENDENCY} \
+            LCG_97a_future_0.17.1_${GCC_DEPENDENCY} \
+            LCG_97a_PyYAML_5.1_${GCC_DEPENDENCY} \
         && \
     # Cleanups
     rm -rf /tmp/*
@@ -47,11 +45,12 @@ ADD ./toolchain.cmake /opt/lhcb/lhcb/DAVINCI/DAVINCI_${DAVINCI_VERSION}
 # NOTE: These entries needs to be updated on each DaVinci update
 RUN echo "export CMTCONFIG=${CMT_VERSION}" >> /usr/local/bin/envset.sh && \
     echo ". /opt/lhcb/LbLogin.sh" >> /usr/local/bin/envset.sh && \
-    echo ". /opt/lhcb/lcg/releases/ROOT/6.18.04-c767d/${CMT_VERSION}/bin/thisroot.sh" >> /usr/local/bin/envset.sh && \
+    echo ". /opt/lhcb/lcg/releases/ROOT/v6.20.06-3f7fd/${CMT_VERSION}/bin/thisroot.sh" >> /usr/local/bin/envset.sh && \
     echo "export LD_LIBRARY_PATH=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/lib64:\${LD_LIBRARY_PATH}" >> /usr/local/bin/envset.sh && \
+    echo "export PATH=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/bin:\${PATH}" >> /usr/local/bin/envset.sh && \
     echo "export CC=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/bin/gcc" >> /usr/local/bin/envset.sh && \
     echo "export CXX=/opt/lhcb/lcg/releases/gcc/9.1.0/x86_64-centos7/bin/g++" >> /usr/local/bin/envset.sh && \
-    echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/HepMC/2.06.10-1a364/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh && \
-    echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/Boost/1.70.0-eebf1/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh
+    echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/HepMC/2.06.11-d5a39/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh && \
+    echo "export CMAKE_PREFIX_PATH=/opt/lhcb/lcg/releases/Boost/1.72.0-8f9a5/${CMT_VERSION}:\${CMAKE_PREFIX_PATH}" >> /usr/local/bin/envset.sh
 
 RUN echo ". /usr/local/bin/envset.sh" >> /home/physicist/.zshrc

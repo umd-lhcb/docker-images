@@ -35,9 +35,9 @@ RUN . /usr/local/bin/envset.sh && \
 
 # Checkout TupleToolSemiLeptonic
 RUN . /usr/local/bin/envset.sh && \
+    git clone https://github.com/umd-lhcb/TupleToolSemiLeptonic.git --branch ${TUPLETOOL_SL_VERSION} --depth 1 && \
     cd DaVinciDev_${DAVINCI_VERSION} && \
-    git lb-use TupleToolSemiLeptonic https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
-    git lb-checkout TupleToolSemiLeptonic/${TUPLETOOL_SL_VERSION} Phys/TupleToolSemiLeptonic
+    cp -r ../TupleToolSemiLeptonic/Phys .
 
 # Compile
 RUN . /usr/local/bin/envset.sh && \
@@ -60,7 +60,7 @@ ARG CMT_VERSION
 
 RUN mkdir -p /build/DaVinciDev_${DAVINCI_VERSION}
 # Copy the build DaVinci to current container
-COPY --from=builder /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMT_VERSION} /build/DaVinciDev_${DAVINCI_VERSION}/build.${CMT_VERSION}
+COPY --from=builder /build/DaVinciDev_${DAVINCI_VERSION} /build/DaVinciDev_${DAVINCI_VERSION}
 
 # Update PATH in .zshrc
 RUN echo "export PATH=/build/DaVinciDev_${DAVINCI_VERSION}/build.${CMT_VERSION}:\${PATH}" >> /home/physicist/.zshrc

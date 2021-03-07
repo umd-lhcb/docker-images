@@ -9,22 +9,37 @@ ARG DAVINCI_VERSION
 FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION} AS builder
 
 ARG DAVINCI_VERSION
+ARG PHYS_VERSION
 ARG TUPLETOOL_SL_VERSION
+ARG TRACKER_ONLY_EMU_VERSION
 ARG CMT_VERSION
 
 RUN mkdir -p /build
 WORKDIR /build
 
-# Check out TupleToolSemiLeptonic
+# Setup a DaVinci dev
 RUN . /usr/local/bin/envset.sh && \
     git config --global user.name "Physicist" && \
     git config --global user.email "lhcb@physics.umd.edu" && \
-    lb-dev DaVinci/${DAVINCI_VERSION} && \
+    lb-dev DaVinci/${DAVINCI_VERSION}
+
+# Checkout TrackerOnlyEmu
+RUN . /usr/local/bin/envset.sh && \
+    git clone https://github.com/umd-lhcb/TrackerOnlyEmu.git --branch ${TRACKER_ONLY_EMU_VERSION} --depth 1 && \
+    cd DaVinciDev_${DAVINCI_VERSION} && \
+    git lb-use Phys && \
+    git lb-checkout Phys/${PHYS_VERSION} Phys/LoKiPhys && \
+    git lb-checkout Phys/${PHYS_VERSION} Phys/DaVinciTypes && \
+    git lb-checkout Phys/${PHYS_VERSION} Phys/RelatedInfoTools && \
+    cp -r ../TrackerOnlyEmu/davinci/* .
+
+# Checkout TupleToolSemiLeptonic
+RUN . /usr/local/bin/envset.sh && \
     cd DaVinciDev_${DAVINCI_VERSION} && \
     git lb-use TupleToolSemiLeptonic https://github.com/umd-lhcb/TupleToolSemiLeptonic.git && \
     git lb-checkout TupleToolSemiLeptonic/${TUPLETOOL_SL_VERSION} Phys/TupleToolSemiLeptonic
 
-# Compile TupleToolApplyIsolation
+# Compile
 RUN . /usr/local/bin/envset.sh && \
     cd DaVinciDev_${DAVINCI_VERSION} && \
     make configure && make

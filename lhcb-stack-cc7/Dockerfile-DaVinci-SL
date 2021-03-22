@@ -10,6 +10,7 @@ FROM umdlhcb/lhcb-stack-cc7:DaVinci-${DAVINCI_VERSION} AS builder
 
 ARG DAVINCI_VERSION
 ARG PHYS_VERSION
+ARG ANALYSIS_VERSION
 ARG TUPLETOOL_SL_VERSION
 ARG TRACKER_ONLY_EMU_VERSION
 ARG CMT_VERSION
@@ -31,6 +32,8 @@ RUN . /usr/local/bin/envset.sh && \
     git lb-checkout Phys/${PHYS_VERSION} Phys/LoKiPhys && \
     git lb-checkout Phys/${PHYS_VERSION} Phys/DaVinciTypes && \
     git lb-checkout Phys/${PHYS_VERSION} Phys/RelatedInfoTools && \
+    git lb-use Analysis && \
+    git lb-checkout Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTupleTrigger && \
     cp -r ../TrackerOnlyEmu/davinci/* .
 
 # Checkout TupleToolSemiLeptonic

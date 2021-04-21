@@ -6,8 +6,9 @@ ANALYSIS_VERSION=v21r6
 TUPLETOOL_SL_VERSION=0.2.1
 TRACKER_ONLY_EMU_VERSION=0.1.1
 
-git config --global user.name "Physicist"
-git config --global user.email "lhcb@physics.umd.edu"
+# Typically not needed.
+#git config --global user.name "Physicist"
+#git config --global user.email "lhcb@physics.umd.edu"
 
 lb-dev DaVinci/${DAVINCI_VERSION}
 cd DaVinciDev_${DAVINCI_VERSION}

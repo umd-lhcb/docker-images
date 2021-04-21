@@ -26,5 +26,6 @@ git lb-checkout Phys/Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTupleTrigger
 git clone https://github.com/umd-lhcb/TrackerOnlyEmu.git \
     --branch ${TRACKER_ONLY_EMU_VERSION} --depth 1
 cp -r ./TrackerOnlyEmu/davinci/* .
+rm -rf ./TrackerOnlyEmu
 
 make configure && make

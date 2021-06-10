@@ -32,8 +32,6 @@ RUN . /usr/local/bin/envset.sh && \
     git lb-checkout Phys/${PHYS_VERSION} Phys/LoKiPhys && \
     git lb-checkout Phys/${PHYS_VERSION} Phys/DaVinciTypes && \
     git lb-checkout Phys/${PHYS_VERSION} Phys/RelatedInfoTools && \
-    git lb-use Analysis && \
-    git lb-checkout Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTupleTrigger && \
     cp -r ../TrackerOnlyEmu/davinci/* .
 
 # Checkout TupleToolSemiLeptonic

@@ -21,9 +21,6 @@ git lb-checkout Phys/${PHYS_VERSION} Phys/LoKiPhys
 git lb-checkout Phys/${PHYS_VERSION} Phys/DaVinciTypes
 git lb-checkout Phys/${PHYS_VERSION} Phys/RelatedInfoTools
 
-git lb-use Analysis
-git lb-checkout Analysis/${ANALYSIS_VERSION} Phys/DecayTreeTupleTrigger
-
 git clone https://github.com/umd-lhcb/TrackerOnlyEmu.git \
     --branch ${TRACKER_ONLY_EMU_VERSION} --depth 1
 cp -r ./TrackerOnlyEmu/davinci/* .

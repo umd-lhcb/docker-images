@@ -6,9 +6,8 @@ CLION_VERSION ?= 2020.3
 
 DAVINCI_VERSION ?= v45r6
 PHYS_VERSION ?= v26r6
-ANALYSIS_VERSION ?= v21r6
 TUPLETOOL_SL_VERSION ?= 0.2.1
-TRACKER_ONLY_EMU_VERSION ?= 0.1.1
+TRACKER_ONLY_EMU_VERSION ?= 0.2.2
 GCC_DEPENDENCY ?= x86_64_centos7_gcc9_opt
 
 # v3r6 can't be downloaded
@@ -81,7 +80,6 @@ lhcb-stack-cc7-DaVinci-SL:
 	    --tag umdlhcb/lhcb-stack-cc7:DaVinci-$(DAVINCI_VERSION)-SL-$(date) \
 		--build-arg DAVINCI_VERSION=$(DAVINCI_VERSION) \
 		--build-arg PHYS_VERSION=$(PHYS_VERSION) \
-		--build-arg ANALYSIS_VERSION=$(ANALYSIS_VERSION) \
 		--build-arg TUPLETOOL_SL_VERSION=$(TUPLETOOL_SL_VERSION) \
 		--build-arg TRACKER_ONLY_EMU_VERSION=$(TRACKER_ONLY_EMU_VERSION) \
 		--build-arg CMT_VERSION=$(CMT_VERSION) \

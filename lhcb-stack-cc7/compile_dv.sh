@@ -9,6 +9,15 @@ TRACKER_ONLY_EMU_VERSION=0.2.2
 #git config --global user.name "Physicist"
 #git config --global user.email "lhcb@physics.umd.edu"
 
+mkdir -p $HOME/build
+
+cd $HOME/build
+
+if [ -d DaVinciDev_${DAVINCI_VERSION} ]; then
+    echo "DaVinci ${DAVINCI_VERSION} build already exists, please rename the DaVinciDev_${DAVINCI_VERSION} folder!"
+    exit 1
+fi
+
 lb-dev DaVinci/${DAVINCI_VERSION}
 cd DaVinciDev_${DAVINCI_VERSION}
 
